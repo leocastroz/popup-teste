@@ -1,15 +1,25 @@
-
 <script>
 export default {
   data() {
     return {
-      openModals: []
-    };
+      openModals: [],
+      formValues: [], 
+      consentChecked: false
+    }
   },
   props: {
     config: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    isFormValid() {
+      const requiredFields = this.config.formFields.filter(field => field.required);
+      const filledFields = this.formValues.filter(value => value !== "");
+      const allRequiredFieldsFilled = requiredFields.length === filledFields.length;
+      const consentChecked = !this.config.consentCheckbox || this.consentChecked;
+      return allRequiredFieldsFilled && consentChecked;
     }
   },
   methods: {
@@ -26,6 +36,11 @@ export default {
     },
     isModalOpen(name) {
       return this.openModals.includes(name);
+    },
+    submitForm() {
+      if (this.isFormValid) {
+        console.log("Form submitted");
+      }
     }
   }
 };
@@ -48,11 +63,9 @@ export default {
       </div>
 
       <div class="nav-bar">
-        <button class="popup-button" @click="openModal('form')">VER POPUP</button>
-        <button class="my-data" @click="openModal('news')">Dados</button>
+        <button class="popup-button" @click="openModal('form')">SOBRE O JOGO</button>
+        <button class="my-data" @click="openModal('news')">VER VÍDEO</button>
       </div>
-      
-  
       <transition name="modal-transition">
         <div v-if="isModalOpen('form')" class="modal">
           <div class="after-modal"> 
@@ -63,20 +76,22 @@ export default {
               </div>
              
               <p class="introdution">{{ config.subtitle }}</p>
+
               <div class="game">
                 <img :src="config.videoURL" alt="GIF">
               </div>
-              <form>
-                <p class="register">{{config.titleForms}}</p>
+
+              <form @submit.prevent="submitForm">
+                <p class="register">{{ config.titleForms }}</p>
                 <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
                   <label :for="'field' + index">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" />
+                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required />
                 </div>
                 <div v-if="config.consentCheckbox" class="form-field">
                   <label for="consentCheckbox">Consentimento para coleta de dados</label>
-                  <input type="checkbox" id="consentCheckbox" />
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button type="submit">Enviar</button>
+                <button class="send" type="submit" :disabled="!isFormValid">Enviar</button>
               </form>
             </div>
             
@@ -99,6 +114,27 @@ export default {
 </template>
   
 <style scoped>
+
+.send {
+  margin-top: 15px;
+}
+
+.form-field label{
+  font-size: 14px;
+  padding: 5px 10px 5px 0;
+  background: linear-gradient(270deg,#fff 0%,#a807ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-field input {
+  border-radius: 5px;
+  background-color: #8b4fbf;
+  border: none;
+  padding: 5px 10px 5px 0;
+  margin: 5px 0;
+}
 
 .my-data {
   background-color: rgb(76, 0, 143);
