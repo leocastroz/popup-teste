@@ -2,21 +2,24 @@
 import PopupHeader from './PopupHeader.vue';
 import PopupContainer from './PopupContainer.vue';
 import PopupHelp from './PopupHelp.vue';
-import jsonData  from '../data/popupConfig';
+import jsonData from '../data/popupConfig';
+import PopupButtons from './PopupButtons.vue';
 
 export default {
   components: {
     PopupHeader,
     PopupContainer,
     PopupHelp,
+    PopupButtons
   },
   data() {
     return {
       openModals: [],
-      formValues: [], 
+      formValues: [],
       consentChecked: false,
       bases: false,
-      jsonData: jsonData
+      jsonData: jsonData,
+      showSecondModal: false
     }
   },
   props: {
@@ -42,11 +45,18 @@ export default {
   methods: {
     closess() {
       this.bases = false;
+      this.showSecondModal = true;
     },
     openModal(name) {
       if (!this.isModalOpen(name)) {
         this.openModals.push(name);
       }
+    },
+    openSecondModal() {
+      this.showSecondModal = true;
+    },
+    closeSeconde() {
+      this.showSecondModal = false;
     },
     closeModal(name) {
       const index = this.openModals.indexOf(name);
@@ -71,54 +81,42 @@ export default {
     <div class="mx-auto">
       <PopupHeader />
       <PopupContainer />
+      <PopupHelp />
+      <PopupButtons :openModal="openModal" />
 
       <transition name="modal-transition">
-        <div v-if="bases" class="modal" >
-          <div class="after-modal"> 
+        <div v-if="bases" class="modal">
+          <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
                 <h2 class="dates-title text-base">{{ config.title }}</h2>
                 <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess">
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
-
               <div class="w-full flex justify-center">
                 <img :src="config.videoURL" alt="GIF" class="w-48">
               </div>
-
               <form @submit.prevent="submitForm">
                 <p class="register">{{ config.titleForms }}</p>
-                <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
-                  <label :for="'field' + index" class="text-sm">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2" />
+                <div v-for="(field, index) in config.formFields" :key="index" class=" bg-black-100">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2 bg-violet-300 p-1" />
                 </div>
-                
-                
-
                 <div v-if="config.consentCheckbox" class="form-field my-2">
-                  <label for="consentCheckbox">Consentimento para coleta de dados</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">Consentimento para coleta de dados</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button class="my-6" type="submit" :disabled="!isFormValid">Enviar</button>
+                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit" :disabled="!isFormValid">Enviar</button>
               </form>
             </div>
           </div>
         </div>
       </transition>
 
-      <PopupHelp />
-
-      <div class="text-center p-10 flex justify-center ">
-        <button class="popup-button bg-black hover:bg-white hover:text-black cursor-pointer text-xs text-white rounded border-2 border-solid m-5" @click="openModal('form')">SOBRE O JOGO</button>
-        <button class="my-data items-center flex text-xs font-black py-3 px-5 m-5 bg-white text-black border-none rounded hover:bg-green-300" @click="openModal('news')">
-          <p>VER VÍDEO</p>
-          <img src="../assets/images/player.svg" alt="player" class="ml-2">
-        </button>
-      </div>
-      
       <transition name="modal-transition">
         <div v-if="isModalOpen('form')" class="modal">
-          <div class="after-modal"> 
+          <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
                 <h2 class="dates-title font-black text-base">{{ config.title }}</h2>
@@ -131,22 +129,23 @@ export default {
               </div>
 
               <form @submit.prevent="submitForm">
-                <p class="register">{{ config.titleForms }}</p>
+                <p class="register font-bold text-lg py-3">{{ config.titleForms }}</p>
                 <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
-                  <label :for="'field' + index" class="text-sm">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2" />
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2 bg-violet-300 p-1" />
                 </div>
                 <div v-if="config.consentCheckbox" class="form-field my-2">
-                  <label for="consentCheckbox">Gostaria de compartilhar seus dados ?</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">Gostaria de compartilhar seus dados ?</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" class="text-black" />
                 </div>
-                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit" :disabled="!isFormValid">Enviar</button>
+                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit"
+                  :disabled="!isFormValid">Enviar</button>
               </form>
             </div>
           </div>
         </div>
       </transition>
-
       <transition name="modal-transition">
         <div v-if="isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 py-8">
@@ -165,51 +164,32 @@ export default {
           </div>
         </div>
       </transition>
-
+      <transition name="modal-transition">
+        <div v-if="showSecondModal" class="modal">
+          <div class="video-modal text-white px-5 py-8">
+            <div class="flex justify-between">
+              <h2 class="text-base font-black">CONFIRA O VÍDEO</h2>
+              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeSeconde">
+            </div>
+            <div class="text-white py-8">
+              <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
+              <div class="flex items-center justify-center">
+                <video controls class="w-11/12 rounded">
+                  <source :src="config.videoBaseURL" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
   
 <style scoped>
 
-.form-field label{
-  padding: 5px 10px 5px 0;
-  background: linear-gradient(270deg,#fff 0%,#a807ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.form-field input {
-  background-color: #1f1727;
-  padding: 5px 10px 5px 0;
-}
-
 .my-data {
   transition: ease-in-out 0.3s;
-}
-
-.popup-button {
-  padding: 10px 20px;
-  font-weight: 900;
-  animation: pulse 2s infinite;
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 15px 1px #5700a9;
-  transition: ease-in-out 0.3s;
-  border: 2px solid #b866ff;
-}
-
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 
 .modal-transition-enter-active,
@@ -272,7 +252,7 @@ export default {
 
 
 .dates .dates-title {
-  background: linear-gradient(270deg,#d890ff 0%,#9200e0 100%);
+  background: linear-gradient(270deg, #d890ff 0%, #9200e0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -297,13 +277,10 @@ export default {
 }
 
 .register {
-  background: linear-gradient(270deg,#d890ff 0%,#9200e0 100%);
+  background: linear-gradient(270deg, #d890ff 0%, #9200e0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 20px 0 ;
 }
 
 </style>
