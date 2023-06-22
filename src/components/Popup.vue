@@ -1,10 +1,22 @@
 <script>
+import PopupHeader from './PopupHeader.vue';
+import PopupContainer from './PopupContainer.vue';
+import PopupHelp from './PopupHelp.vue';
+import jsonData  from '../data/popupConfig';
+
 export default {
+  components: {
+    PopupHeader,
+    PopupContainer,
+    PopupHelp,
+  },
   data() {
     return {
       openModals: [],
       formValues: [], 
-      consentChecked: false
+      consentChecked: false,
+      bases: false,
+      jsonData: jsonData
     }
   },
   props: {
@@ -12,6 +24,11 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.bases = true;
+    }, 1000);
   },
   computed: {
     isFormValid() {
@@ -23,6 +40,9 @@ export default {
     }
   },
   methods: {
+    closess() {
+      this.bases = false;
+    },
     openModal(name) {
       if (!this.isModalOpen(name)) {
         this.openModals.push(name);
@@ -48,79 +68,111 @@ export default {
   
 <template>
   <div v-if="config" class="popup">
-    <div class="container">
-      <div class="box">
-        <h1>Popup - Popconvert</h1>
-      </div>
+    <div class="mx-auto">
+      <PopupHeader />
+      <PopupContainer />
 
-      <div class="description">
-        <h2>Bem-vindo à Popup</h2>
-        <p>
-          Esse é um componente de popup genérico, 
-          que pode ser usado para exibir qualquer 
-          conteúdo.
-        </p>
-      </div>
-
-      <div class="nav-bar">
-        <button class="popup-button" @click="openModal('form')">SOBRE O JOGO</button>
-        <button class="my-data" @click="openModal('news')">VER VÍDEO</button>
-      </div>
       <transition name="modal-transition">
-        <div v-if="isModalOpen('form')" class="modal">
+        <div v-if="bases" class="modal" >
           <div class="after-modal"> 
-            <div class="dates">
-              <div class="header-modal">
-                <h2 class="dates-title">{{ config.title }}</h2>
-                <img class="close" src="../assets/images/close.svg" alt="" @click="closeModal('form')">
+            <div class="dates py-2 px-5">
+              <div class="flex justify-between">
+                <h2 class="dates-title text-base">{{ config.title }}</h2>
+                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess">
               </div>
-             
               <p class="introdution">{{ config.subtitle }}</p>
 
-              <div class="game">
-                <img :src="config.videoURL" alt="GIF">
+              <div class="w-full flex justify-center">
+                <img :src="config.videoURL" alt="GIF" class="w-48">
               </div>
 
               <form @submit.prevent="submitForm">
                 <p class="register">{{ config.titleForms }}</p>
                 <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
-                  <label :for="'field' + index">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required />
+                  <label :for="'field' + index" class="text-sm">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2" />
                 </div>
-                <div v-if="config.consentCheckbox" class="form-field">
+                
+                
+
+                <div v-if="config.consentCheckbox" class="form-field my-2">
                   <label for="consentCheckbox">Consentimento para coleta de dados</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button class="send" type="submit" :disabled="!isFormValid">Enviar</button>
+                <button class="my-6" type="submit" :disabled="!isFormValid">Enviar</button>
               </form>
             </div>
-            
           </div>
         </div>
       </transition>
 
+      <PopupHelp />
 
+      <div class="text-center p-10 flex justify-center ">
+        <button class="popup-button bg-black hover:bg-white hover:text-black cursor-pointer text-xs text-white rounded border-2 border-solid m-5" @click="openModal('form')">SOBRE O JOGO</button>
+        <button class="my-data items-center flex text-xs font-black py-3 px-5 m-5 bg-white text-black border-none rounded hover:bg-green-300" @click="openModal('news')">
+          <p>VER VÍDEO</p>
+          <img src="../assets/images/player.svg" alt="player" class="ml-2">
+        </button>
+      </div>
+      
       <transition name="modal-transition">
-        <div v-if="isModalOpen('news')" class="modal">
-          <h2>Modal News</h2>
-          <p>Conteúdo da Modal News...</p>
-          <button @click="closeModal('news')">Fechar</button>
+        <div v-if="isModalOpen('form')" class="modal">
+          <div class="after-modal"> 
+            <div class="dates py-2 px-5">
+              <div class="flex justify-between">
+                <h2 class="dates-title font-black text-base">{{ config.title }}</h2>
+                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('form')">
+              </div>
+              <p class="introdution">{{ config.subtitle }}</p>
+
+              <div class="w-full flex justify-center">
+                <img :src="config.videoURL" alt="GIF" class="w-48">
+              </div>
+
+              <form @submit.prevent="submitForm">
+                <p class="register">{{ config.titleForms }}</p>
+                <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
+                  <label :for="'field' + index" class="text-sm">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value" @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2" />
+                </div>
+                <div v-if="config.consentCheckbox" class="form-field my-2">
+                  <label for="consentCheckbox">Gostaria de compartilhar seus dados ?</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                </div>
+                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit" :disabled="!isFormValid">Enviar</button>
+              </form>
+            </div>
+          </div>
         </div>
       </transition>
 
-      
+      <transition name="modal-transition">
+        <div v-if="isModalOpen('news')" class="modal">
+          <div class="video-modal text-white px-5 py-8">
+            <div class="flex justify-between">
+              <h2 class="text-base font-black">CONFIRA O VÍDEO</h2>
+              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')">
+            </div>
+            <div class="text-white py-8">
+              <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
+              <div class="flex items-center justify-center">
+                <video controls class="w-11/12 rounded">
+                  <source :src="config.videoBaseURL" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+
     </div>
   </div>
 </template>
   
 <style scoped>
 
-.send {
-  margin-top: 15px;
-}
-
 .form-field label{
-  font-size: 14px;
   padding: 5px 10px 5px 0;
   background: linear-gradient(270deg,#fff 0%,#a807ff 100%);
   -webkit-background-clip: text;
@@ -129,40 +181,22 @@ export default {
 }
 
 .form-field input {
-  border-radius: 5px;
-  background-color: #8b4fbf;
-  border: none;
+  background-color: #1f1727;
   padding: 5px 10px 5px 0;
-  margin: 5px 0;
 }
 
 .my-data {
-  background-color: rgb(76, 0, 143);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  color: #fff;
+  transition: ease-in-out 0.3s;
 }
 
 .popup-button {
-  border: none;
   padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 12px;
-  background-color: #b866ff;
   font-weight: 900;
-  color: #ffffff;
   animation: pulse 2s infinite;
-  cursor: pointer;
   letter-spacing: 0.5px;
   box-shadow: 0 0 15px 1px #5700a9;
   transition: ease-in-out 0.3s;
   border: 2px solid #b866ff;
-}
-
-.popup-button:hover {
-  background-color: #ed4dff;
-  border: 2px solid #fff;
 }
 
 
@@ -176,52 +210,6 @@ export default {
   100% {
     transform: scale(1);
   }
-}
-
-.description {
-  margin: 30px auto;
-  width: 300px;
-  border-radius: 10px;
-  text-align: center;
-  padding: 25px;
-  border: 2px solid #ffffff76;
-}
-
-.description h2 {
-  color: #5700a9;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 20px;
-  margin: 10px;
-}
-
-.description p {
-  color: #ffffff6b;
-  font-size: 14px;
-  letter-spacing: 1px !important;
-}
-
-.nav-bar {
-  text-align: center;
-  padding: 40px;
-}
-.nav-bar button {
-  margin: 10px;
-}
-
-.box {
-  text-align: center;
-  padding: 60px 0 30px 0;
-}
-
-h1 {
-  text-transform: uppercase;
-  background: linear-gradient(270deg,#000000 0%,#a600ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900;
-  font-size: 25px;
 }
 
 .modal-transition-enter-active,
@@ -258,6 +246,17 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+}
+
+.video-modal {
+  max-width: 400px;
+  min-height: 500px;
+  position: absolute;
+  background-color: rgb(47, 33, 60);
+  border-radius: 10px;
+  text-align: start;
+  border: 3px solid #a501fe;
 }
 
 .after-modal {
@@ -271,17 +270,12 @@ h1 {
   border: 3px solid #a501fe;
 }
 
-.dates {
-  padding: 20px;
-}
 
 .dates .dates-title {
   background: linear-gradient(270deg,#d890ff 0%,#9200e0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 900;
-  font-size: 20px;
   margin: 20px 0;
 }
 
@@ -294,27 +288,11 @@ h1 {
   color: #949494;
 }
 
-.game {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.game img {
-  max-width: 200px;
-}
-
-.header-modal {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-modal .close {
-  width: 20px;
-  cursor: pointer;
+.close {
   transition: transform .3s ease;
 }
 
-.header-modal .close:hover {
+.close:hover {
   transform: rotate(45deg);
 }
 
