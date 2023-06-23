@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex justify-between">
-      <h2 class="dates-title font-black text-base my-5">
+      <h2 class="font-black text-base my-5 text-white">
         {{ config.title }}
       </h2>
       <img
@@ -11,7 +11,7 @@
         @click="closeIn"
       />
     </div>
-    <p class="introdution">{{ config.subtitle }}</p>
+    <p class="text-xs/[15px] text-justify pb-4 text-emerald-200">{{ config.subtitle }}</p>
     <div class="w-full flex justify-center">
       <img :src="config.videoURL" alt="GIF" class="w-40" />
     </div>

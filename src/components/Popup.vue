@@ -150,17 +150,25 @@ export default {
           @hidden-cut="hiddenCut"
         />
       </div>
+
+
+
+
+
+
+
+
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
-          <div class="after-modal">
-            <div class="dates py-2 px-5">
+          <div class="after-modal max-w-sm absolute text-start rounded-xl">
+            <div class="py-2 px-5">
               <PopupHeaderModal
                 :config="config"
                 @close-in="closeIn"
                 v-if="true"
               />
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">
+                <p class="font-bold text-lg py-3 text-emerald-200">
                   {{ config.titleForms }}
                 </p>
                 <div
@@ -182,7 +190,7 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between">
+                <div class="flex items-center flex justify-between">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
@@ -211,10 +219,10 @@ export default {
                   />
                 </div>
                 <button
-                  class="my-2 py-2 px-5 rounded text-xs font-extrabold"
+                  class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
                   :class="{
-                    'bg-red-400': !isFormValid,
-                    'bg-green-400': isFormValid,
+                    'bg-black': !isFormValid,
+                    'bg-emerald-200': isFormValid,
                   }"
                   type="submit"
                   :disabled="!isFormValid"
@@ -226,14 +234,31 @@ export default {
           </div>
         </div>
       </transition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <transition name="modal-transition">
         <div v-if="showFormModal && isModalOpen('form')" class="modal">
-          <div class="after-modal">
-            <div class="dates py-2 px-10">
+          <div class="after-modal max-w-sm absolute text-start rounded-xl">
+            <div class="py-2 px-5">
               <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
-
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">
+                <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
                 <div
@@ -255,7 +280,7 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between">
+                <div class="flex items-center flex justify-between">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
@@ -284,10 +309,10 @@ export default {
                   />
                 </div>
                 <button
-                  class="my-2 py-2 px-5 rounded text-xs font-extrabold"
+                  class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
                   :class="{
-                    'bg-red-400': !isFormValid,
-                    'bg-green-400': isFormValid,
+                    'bg-black': !isFormValid,
+                    'bg-emerald-200': isFormValid,
                   }"
                   type="submit"
                   :disabled="!isFormValid"
@@ -301,11 +326,11 @@ export default {
       </transition>
       <transition name="modal-transition">
         <div v-if="showSecondFormModal && isModalOpen('news')" class="modal">
-          <div class="video-modal text-white px-5 max-w-sm">
+          <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSectionTwo :config="config" @closeModal="closeModal" />
             <div class="text-white">
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">
+                <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
                 <div
@@ -328,7 +353,7 @@ export default {
                   />
                 </div>
                 <div
-                  class="my-genders flex items-center flex justify-between text-sm"
+                  class="flex items-center flex justify-between text-sm"
                 >
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
@@ -358,10 +383,10 @@ export default {
                   />
                 </div>
                 <button
-                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
                   :class="{
-                    'bg-red-400': !isFormValid,
-                    'bg-green-400': isFormValid,
+                    'bg-black': !isFormValid,
+                    'bg-emerald-200': isFormValid,
                   }"
                   type="submit"
                   :disabled="!isFormValid"
@@ -375,11 +400,11 @@ export default {
       </transition>
       <transition name="modal-transition">
         <div v-if="showSecondModal" class="modal">
-          <div class="video-modal text-white px-5 max-w-sm">
+          <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSection :config="config" @closeSecondModal="closeSeconde" />
             <div class="text-black">
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">
+                <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
                 <div
@@ -402,7 +427,7 @@ export default {
                   />
                 </div>
                 <div
-                  class="my-genders flex items-center flex justify-between text-sm"
+                  class="flex items-center flex justify-between text-sm"
                 >
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
@@ -432,10 +457,10 @@ export default {
                   />
                 </div>
                 <button
-                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
                   :class="{
-                    'bg-red-400': !isFormValid,
-                    'bg-green-400': isFormValid,
+                    'bg-black': !isFormValid,
+                    'bg-emerald-200': isFormValid,
                   }"
                   type="submit"
                   :disabled="!isFormValid"
