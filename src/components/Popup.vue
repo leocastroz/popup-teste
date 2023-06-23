@@ -34,6 +34,7 @@ export default {
       pastCode: false,
       modalCupom: false,
       showFormModal: true,
+      showSecondFormModal: true,
     };
   },
   props: {
@@ -85,6 +86,7 @@ export default {
     },
     closeNow() {
       this.modalSuccess = false
+      location.reload()
     },
     closeModal(name) {
       const index = this.openModals.indexOf(name)
@@ -104,6 +106,8 @@ export default {
         this.modalSuccess = true
         this.bases = false
         this.showFormModal = false
+        this.showSecondModal = false
+        this.showSecondFormModal = false
         this.spinerLoading = true
         setTimeout(() => {
           this.spinerLoading = false
@@ -140,22 +144,21 @@ export default {
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
+
+
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
                 <h2 class="dates-title font-black text-base my-5">
                   {{ config.title }}
                 </h2>
-                <img
-                  class="close cursor-pointer w-5"
-                  src="../assets/images/close.svg"
-                  alt=""
-                  @click="closeIn"
-                />
+                <img :src="config.close" alt="close" class="close cursor-pointer w-5"   @click="closeIn" />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
               <div class="w-full flex justify-center">
                 <img :src="config.videoURL" alt="GIF" class="w-48" />
               </div>
+
+
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
@@ -215,6 +218,7 @@ export default {
                   {{ config.send }}
                 </button>
               </form>
+
             </div>
           </div>
         </div>
@@ -228,12 +232,7 @@ export default {
                 <h2 class="dates-title font-black text-base my-5">
                   {{ config.title }}
                 </h2>
-                <img
-                  class="close cursor-pointer w-5"
-                  src="../assets/images/close.svg"
-                  alt=""
-                  @click="closeModal('form')"
-                />
+                <img :src="config.close" alt="close" class="close cursor-pointer w-5"   @click="closeModal('form')" />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
 
@@ -305,16 +304,11 @@ export default {
         </div>
       </transition>
       <transition name="modal-transition">
-        <div v-if="isModalOpen('news')" class="modal">
+        <div v-if="showSecondFormModal && isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 max-w-sm">
             <div class="register flex justify-between mt-5">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img
-                class="close cursor-pointer w-5"
-                src="../assets/images/close.svg"
-                alt=""
-                @click="closeModal('news')"
-              />
+              <img :src="config.close" alt="GIF" class="close cursor-pointer w-5" @click="closeModal('news')" />
             </div>
             <div class="text-white">
               <p class="mt-3 mb-5 text-justify text-white text-sm">
@@ -392,13 +386,9 @@ export default {
         <div v-if="showSecondModal" class="modal">
           <div class="video-modal text-white px-5 max-w-sm">
             <div class="register flex justify-between mt-5">
+              <p>oie</p>
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img
-                class="close cursor-pointer w-5"
-                src="../assets/images/close.svg"
-                alt=""
-                @click="closeSeconde"
-              />
+              <img :src="config.close" alt="GIF" class="close cursor-pointer w-5"  @click="closeSeconde" />
             </div>
             <div class="text-white">
               <p class="mt-3 mb-5 text-justify text-white text-sm">
