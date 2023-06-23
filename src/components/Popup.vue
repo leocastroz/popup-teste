@@ -1,16 +1,18 @@
 <script>
-import PopupHeader from './PopupHeader.vue';
-import PopupContainer from './PopupContainer.vue';
-import PopupHelp from './PopupHelp.vue';
-import jsonData from '../data/popupConfig';
-import PopupButtons from './PopupButtons.vue';
+import PopupHeader from "./PopupHeader.vue";
+import PopupContainer from "./PopupContainer.vue";
+import PopupHelp from "./PopupHelp.vue";
+import jsonData from "../data/popupConfig";
+import PopupButtons from "./PopupButtons.vue";
+import GenderSelect from "./GenderSelect.vue";
 
 export default {
   components: {
     PopupHeader,
     PopupContainer,
     PopupHelp,
-    PopupButtons
+    PopupButtons,
+    GenderSelect,
   },
   data() {
     return {
@@ -19,14 +21,15 @@ export default {
       consentChecked: false,
       bases: false,
       jsonData: jsonData,
-      showSecondModal: false
-    }
+      showSecondModal: false,
+      selectedGender: "",
+    };
   },
   props: {
     config: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -35,12 +38,16 @@ export default {
   },
   computed: {
     isFormValid() {
-      const requiredFields = this.config.formFields.filter(field => field.required);
-      const filledFields = this.formValues.filter(value => value !== "");
-      const allRequiredFieldsFilled = requiredFields.length === filledFields.length;
-      const consentChecked = !this.config.consentCheckbox || this.consentChecked;
+      const requiredFields = this.config.formFields.filter(
+        (field) => field.required
+      );
+      const filledFields = this.formValues.filter((value) => value !== "");
+      const allRequiredFieldsFilled =
+        requiredFields.length === filledFields.length;
+      const consentChecked =
+        !this.config.consentCheckbox || this.consentChecked;
       return allRequiredFieldsFilled && consentChecked;
-    }
+    },
   },
   methods: {
     closess() {
@@ -71,11 +78,11 @@ export default {
       if (this.isFormValid) {
         console.log("Form submitted");
       }
-    }
-  }
+    },
+  },
 };
 </script>
-  
+
 <template>
   <div v-if="config" class="popup">
     <div class="mx-auto">
@@ -89,25 +96,39 @@ export default {
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base">{{ config.title }}</h2>
-                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess">
+                <h2 class="dates-title font-black text-base">
+                  {{ config.title }}
+                </h2>
+                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess" />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
               <div class="w-full flex justify-center">
-                <img :src="config.videoURL" alt="GIF" class="w-48">
+                <img :src="config.videoURL" alt="GIF" class="w-48" />
               </div>
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">{{ config.titleForms }}</p>
-                <div v-for="(field, index) in config.formFields" :key="index" class=" bg-black-100">
+                <p class="register font-bold text-lg py-3">
+                  {{ config.titleForms }}
+                </p>
+                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100">
                   <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
                   <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2 bg-violet-300 p-1" />
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1" />
+                </div>
+                <div class="my-genders flex items-center">
+                  <p class="text-violet-300 pr-2">Gênero</p>
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" />
                 </div>
                 <div v-if="config.consentCheckbox" class="form-field my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2">Consentimento para coleta de dados</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit" :disabled="!isFormValid">Enviar</button>
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
+                  'bg-red-400': !isFormValid,
+                  'bg-green-400': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
+                  Enviar
+                </button>
               </form>
             </div>
           </div>
@@ -119,28 +140,40 @@ export default {
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base">{{ config.title }}</h2>
-                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('form')">
+                <h2 class="dates-title font-black text-base">
+                  {{ config.title }}
+                </h2>
+                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt=""
+                  @click="closeModal('form')" />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
 
               <div class="w-full flex justify-center">
-                <img :src="config.videoURL" alt="GIF" class="w-48">
+                <img :src="config.videoURL" alt="GIF" class="w-48" />
               </div>
 
               <form @submit.prevent="submitForm">
-                <p class="register font-bold text-lg py-3">{{ config.titleForms }}</p>
+                <p class="register font-bold text-lg py-3">
+                  {{ config.titleForms }}
+                </p>
                 <div v-for="(field, index) in config.formFields" :key="index" class="form-field">
                   <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
                   <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required class="rounded border-none my-2 bg-violet-300 p-1" />
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1" />
                 </div>
                 <div v-if="config.consentCheckbox" class="form-field my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2">Gostaria de compartilhar seus dados ?</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" class="text-black" />
                 </div>
-                <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit"
-                  :disabled="!isFormValid">Enviar</button>
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
+                  'bg-red-400': !isFormValid,
+                  'bg-green-400': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
+                  Enviar
+                </button>
+                <!-- <button class="my-6 bg-green-400 py-2 px-5 rounded text-xs text-lime-700 font-extrabold" type="submit"
+                  :disabled="!isFormValid">Enviar</button> -->
               </form>
             </div>
           </div>
@@ -150,14 +183,16 @@ export default {
         <div v-if="isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
-              <h2 class="text-base font-black">{{config.video.title}}</h2>
-              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')">
+              <h2 class="text-base font-black">{{ config.video.title }}</h2>
+              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')" />
             </div>
             <div class="text-white py-8">
-              <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
+              <p class="mt-3 mb-5 text-center text-purple-400">
+                Confira as melhores jogadas 🎆
+              </p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">
-                  <source :src="config.video.videoURL" type="video/mp4">
+                  <source :src="config.video.videoURL" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -168,14 +203,16 @@ export default {
         <div v-if="showSecondModal" class="modal">
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
-              <h2 class="text-base font-black">{{config.video.title}}</h2>
-              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeSeconde">
+              <h2 class="text-base font-black">{{ config.video.title }}</h2>
+              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeSeconde" />
             </div>
             <div class="text-white py-8">
-              <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
+              <p class="mt-3 mb-5 text-center text-purple-400">
+                Confira as melhores jogadas 🎆
+              </p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">
-                  <source :src="config.video.videoURL" type="video/mp4">
+                  <source :src="config.video.videoURL" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -185,9 +222,8 @@ export default {
     </div>
   </div>
 </template>
-  
-<style scoped>
 
+<style scoped>
 .my-data {
   transition: ease-in-out 0.3s;
 }
@@ -250,7 +286,6 @@ export default {
   border: 3px solid #a501fe;
 }
 
-
 .dates .dates-title {
   background: linear-gradient(270deg, #d890ff 0%, #9200e0 100%);
   -webkit-background-clip: text;
@@ -269,7 +304,7 @@ export default {
 }
 
 .close {
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
 }
 
 .close:hover {
@@ -282,5 +317,4 @@ export default {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 </style>
