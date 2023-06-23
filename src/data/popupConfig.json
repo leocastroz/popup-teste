@@ -9,7 +9,7 @@
       "formFields": [
         { "label": "Seu e-mail", "type": "email" },
         { "label": "Seu nome", "type": "text" },
-        { "label": "Número de Celular", "type": "tel" }
+        { "label": "Número +DDD", "type": "tel" }
       ],
       "gender": [
         { "label": "Masculino", "type": "email" },
@@ -25,7 +25,7 @@
         "formFields": [
           { "label": "Email", "type": "email" },
           { "label": "Nome", "type": "text" },
-          { "label": "Número de Celular", "type": "tel" }
+          { "label": "Número +DDD", "type": "tel" }
         ],
         "gender": [
           { "label": "Masculino", "type": "email" },
