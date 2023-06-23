@@ -5,6 +5,7 @@ import PopupHelp from "./PopupHelp.vue";
 import jsonData from "../data/popupConfig";
 import PopupButtons from "./PopupButtons.vue";
 import GenderSelect from "./GenderSelect.vue";
+import MyModal from "./MyModal.vue";
 
 export default {
   components: {
@@ -13,6 +14,7 @@ export default {
     PopupHelp,
     PopupButtons,
     GenderSelect,
+    MyModal,
   },
   data() {
     return {
@@ -21,12 +23,12 @@ export default {
       consentChecked: true,
       dataChecked: true,
       bases: false,
-      jsonData: jsonData,
+      jsonData,
       showSecondModal: false,
       selectedGender: "",
       modalSuccess: false,
       spinerLoading: false,
-      cupom: 'https://github.com/leocastroz',
+      cupom: "https://github.com/leocastroz",
       cutCode: true,
       pastCode: false,
       modalCupom: false,
@@ -41,80 +43,75 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.bases = true;
-    }, 1000);
+      this.bases = true
+    }, 1000)
   },
   computed: {
     isFormValid() {
-      const requiredFields = this.config.formFields.filter(
-        (field) => field.required
-      );
-      const filledFields = this.formValues.filter((value) => !value === "");
-      const allRequiredFieldsFilled = requiredFields.length === filledFields.length;
-      const consentChecked = !this.config.consentCheckbox || this.consentChecked;
-        return allRequiredFieldsFilled && consentChecked;
+      const requiredFields = this.config.formFields.filter((field) => field.required)
+      const filledFields = this.formValues.filter((value) => value !== "")
+      const allRequiredFieldsFilled = requiredFields.length === filledFields.length
+      const consentChecked = !this.config.consentCheckbox || this.consentChecked
+      return allRequiredFieldsFilled && consentChecked
     },
   },
   methods: {
     copiarNumero() {
       if (!this.exibirColar) {
-        const el = document.createElement('textarea');
-        el.value = this.cupom;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        
-        this.exibirColar = true;
+        const el = document.createElement("textarea")
+        el.value = this.cupom
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand("copy")
+        document.body.removeChild(el)
+        this.exibirColar = true
       }
     },
-    closess() {
+    closeIn() {
       this.bases = false;
-      this.showSecondModal = true;
+      this.showSecondModal = true
     },
     openModal(name) {
       if (!this.isModalOpen(name)) {
-        this.openModals.push(name);
+        this.openModals.push(name)
       }
     },
     openSecondModal() {
-      this.showSecondModal = true;
+      this.showSecondModal = true
     },
     closeSeconde() {
-      this.showSecondModal = false;
+      this.showSecondModal = false
     },
-    fechar() {
-      this.modalSuccess = false;
+    closeNow() {
+      this.modalSuccess = false
     },
     closeModal(name) {
-      const index = this.openModals.indexOf(name);
+      const index = this.openModals.indexOf(name)
       if (index !== -1) {
-        this.openModals.splice(index, 1);
+        this.openModals.splice(index, 1)
       }
     },
     isModalOpen(name) {
-      return this.openModals.includes(name);
+      return this.openModals.includes(name)
     },
     hiddenCut() {
-      this.cutCode = false;
-      this.pastCode = true;
+      this.cutCode = false
+      this.pastCode = true
     },
     submitForm() {
       if (this.isFormValid) {
-        this.modalSuccess = true;
-        this.bases = false;
-        this.showFormModal = false;
-        this.spinerLoading = true;
+        this.modalSuccess = true
+        this.bases = false
+        this.showFormModal = false
+        this.spinerLoading = true
         setTimeout(() => {
-          this.spinerLoading = false;
-          this.modalCupom = true;
-        }, 3000);
-       
-        console.log("Form submitted");
+          this.spinerLoading = false
+          this.modalCupom = true
+        }, 3000)
       }
     },
   },
-};
+}
 </script>
 
 <template>
@@ -124,24 +121,19 @@ export default {
       <PopupContainer />
       <PopupHelp />
       <PopupButtons :openModal="openModal" />
+
       <div v-if="modalSuccess" class="modal">
-        <div class="w-1/2 w-max bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
-          <div v-if="spinerLoading" class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
-          </div>
-          <div v-if="modalCupom">
-            <div class="flex justify-between">
-              <p class="font-black text-base text-white">{{config.titleCupom}}</p>
-              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="fechar" />
-            </div>
-            <div class="grid start mt-2">
-              <button @click="copiarNumero">
-                <img class="w-7" @click="hiddenCut" v-if="cutCode" src="../assets/images/cut.svg" alt="cortar">
-                <img class="w-7" v-else-if="pastCode" src="../assets/images/paste.svg" alt="">
-              </button>
-              <p class="text-start mt-2 text-white text-sm">{{ cupom }}</p>
-            </div>
-          </div>
-        </div>
+        <MyModal
+          :config="config"
+          :spiner-loading="spinerLoading"
+          :modal-cupom="modalCupom"
+          :cupom="cupom"
+          :cut-code="cutCode"
+          :past-code="pastCode"
+          @closeNow="closeNow"
+          @copiar-numero="copiarNumero"
+          @hidden-cut="hiddenCut"
+        />
       </div>
 
       <transition name="modal-transition">
@@ -152,7 +144,12 @@ export default {
                 <h2 class="dates-title font-black text-base">
                   {{ config.title }}
                 </h2>
-                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess" />
+                <img
+                  class="close cursor-pointer w-5"
+                  src="../assets/images/close.svg"
+                  alt=""
+                  @click="closeIn"
+                />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
               <div class="w-full flex justify-center">
@@ -162,29 +159,59 @@ export default {
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
                 </p>
-                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
-                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                <div
+                  v-for="(field, index) in config.formFields"
+                  :key="index"
+                  class="bg-black-100 flex justify-between items-center"
+                >
+                  <label
+                    :for="'field' + index"
+                    class="text-sm text-violet-300 pr-3"
+                    >{{ field.label }}</label
+                  >
+                  <input
+                    :type="field.type"
+                    :id="'field' + index"
+                    :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)"
+                    required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
+                  />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
-                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                  <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
+                  <GenderSelect
+                    :options="config.gender"
+                    :selectedGender.sync="selectedGender"
+                    class="mr-36"
+                  />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.shareData
+                  }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.acceptTerms
+                  }}</label>
+                  <input
+                    type="checkbox"
+                    id="consentCheckbox"
+                    v-model="consentChecked"
+                  />
                 </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
-                  'bg-red-400': !isFormValid,
-                  'bg-green-400': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
-                {{ config.send }}
+                <button
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  :class="{
+                    'bg-red-400': !isFormValid,
+                    'bg-green-400': isFormValid,
+                  }"
+                  type="submit"
+                  :disabled="!isFormValid"
+                >
+                  {{ config.send }}
                 </button>
               </form>
             </div>
@@ -200,8 +227,12 @@ export default {
                 <h2 class="dates-title font-black text-base">
                   {{ config.title }}
                 </h2>
-                <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt=""
-                  @click="closeModal('form')" />
+                <img
+                  class="close cursor-pointer w-5"
+                  src="../assets/images/close.svg"
+                  alt=""
+                  @click="closeModal('form')"
+                />
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
 
@@ -213,28 +244,58 @@ export default {
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
                 </p>
-                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
-                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                <div
+                  v-for="(field, index) in config.formFields"
+                  :key="index"
+                  class="bg-black-100 flex justify-between items-center"
+                >
+                  <label
+                    :for="'field' + index"
+                    class="text-sm text-violet-300 pr-3"
+                    >{{ field.label }}</label
+                  >
+                  <input
+                    :type="field.type"
+                    :id="'field' + index"
+                    :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)"
+                    required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
+                  />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
-                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                  <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
+                  <GenderSelect
+                    :options="config.gender"
+                    :selectedGender.sync="selectedGender"
+                    class="mr-36"
+                  />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.shareData
+                  }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.acceptTerms
+                  }}</label>
+                  <input
+                    type="checkbox"
+                    id="consentCheckbox"
+                    v-model="consentChecked"
+                  />
                 </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
-                  'bg-red-400': !isFormValid,
-                  'bg-green-400': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
+                <button
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  :class="{
+                    'bg-red-400': !isFormValid,
+                    'bg-green-400': isFormValid,
+                  }"
+                  type="submit"
+                  :disabled="!isFormValid"
+                >
                   {{ config.send }}
                 </button>
               </form>
@@ -247,7 +308,12 @@ export default {
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')" />
+              <img
+                class="close cursor-pointer w-5"
+                src="../assets/images/close.svg"
+                alt=""
+                @click="closeModal('news')"
+              />
             </div>
             <h1>UNITARIO</h1>
             <div class="text-white py-8">
@@ -263,28 +329,58 @@ export default {
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
                 </p>
-                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
-                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                <div
+                  v-for="(field, index) in config.formFields"
+                  :key="index"
+                  class="bg-black-100 flex justify-between items-center"
+                >
+                  <label
+                    :for="'field' + index"
+                    class="text-sm text-violet-300 pr-3"
+                    >{{ field.label }}</label
+                  >
+                  <input
+                    :type="field.type"
+                    :id="'field' + index"
+                    :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)"
+                    required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
+                  />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
-                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                  <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
+                  <GenderSelect
+                    :options="config.gender"
+                    :selectedGender.sync="selectedGender"
+                    class="mr-36"
+                  />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.shareData
+                  }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.acceptTerms
+                  }}</label>
+                  <input
+                    type="checkbox"
+                    id="consentCheckbox"
+                    v-model="consentChecked"
+                  />
                 </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
-                  'bg-red-400': !isFormValid,
-                  'bg-green-400': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
+                <button
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  :class="{
+                    'bg-red-400': !isFormValid,
+                    'bg-green-400': isFormValid,
+                  }"
+                  type="submit"
+                  :disabled="!isFormValid"
+                >
                   {{ config.send }}
                 </button>
               </form>
@@ -297,7 +393,12 @@ export default {
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeSeconde" />
+              <img
+                class="close cursor-pointer w-5"
+                src="../assets/images/close.svg"
+                alt=""
+                @click="closeSeconde"
+              />
             </div>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">
@@ -312,28 +413,58 @@ export default {
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
                 </p>
-                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
-                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                  <input :type="field.type" :id="'field' + index" :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)" required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                <div
+                  v-for="(field, index) in config.formFields"
+                  :key="index"
+                  class="bg-black-100 flex justify-between items-center"
+                >
+                  <label
+                    :for="'field' + index"
+                    class="text-sm text-violet-300 pr-3"
+                    >{{ field.label }}</label
+                  >
+                  <input
+                    :type="field.type"
+                    :id="'field' + index"
+                    :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)"
+                    required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
+                  />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
-                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                  <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
+                  <GenderSelect
+                    :options="config.gender"
+                    :selectedGender.sync="selectedGender"
+                    class="mr-36"
+                  />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.shareData
+                  }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                    config.acceptTerms
+                  }}</label>
+                  <input
+                    type="checkbox"
+                    id="consentCheckbox"
+                    v-model="consentChecked"
+                  />
                 </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
-                  'bg-red-400': !isFormValid,
-                  'bg-green-400': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
+                <button
+                  class="my-6 py-2 px-5 rounded text-xs font-extrabold"
+                  :class="{
+                    'bg-red-400': !isFormValid,
+                    'bg-green-400': isFormValid,
+                  }"
+                  type="submit"
+                  :disabled="!isFormValid"
+                >
                   {{ config.send }}
                 </button>
               </form>
@@ -346,7 +477,6 @@ export default {
 </template>
 
 <style scoped>
-
 .my-data {
   transition: ease-in-out 0.3s;
 }
