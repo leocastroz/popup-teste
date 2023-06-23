@@ -1,6 +1,6 @@
 <template>
     <div class="description">
-        <h2 class="font-black uppercase text-sky-700">Bem-vindo à Popup</h2>
+        <h2 class="font-black uppercase text-sky-700 w-full">Bem-vindo à Popup</h2>
         <p>
             Esse é um componente de popup genérico,
             que pode ser usado para exibir qualquer

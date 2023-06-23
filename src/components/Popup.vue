@@ -24,6 +24,12 @@ export default {
       jsonData: jsonData,
       showSecondModal: false,
       selectedGender: "",
+      modalSuccess: false,
+      spiner: false,
+      numero: 'https://github.com/leocastroz',
+      cutCode: true,
+      pastCode: false,
+      modalCupom: false,
     };
   },
   props: {
@@ -49,6 +55,18 @@ export default {
     },
   },
   methods: {
+    copiarNumero() {
+      if (!this.exibirColar) {
+        const el = document.createElement('textarea');
+        el.value = this.numero;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        
+        this.exibirColar = true;
+      }
+    },
     closess() {
       this.bases = false;
       this.showSecondModal = true;
@@ -64,6 +82,9 @@ export default {
     closeSeconde() {
       this.showSecondModal = false;
     },
+    fechar() {
+      this.modalSuccess = false;
+    },
     closeModal(name) {
       const index = this.openModals.indexOf(name);
       if (index !== -1) {
@@ -73,8 +94,20 @@ export default {
     isModalOpen(name) {
       return this.openModals.includes(name);
     },
+    hiddenCut() {
+      this.cutCode = false;
+      this.pastCode = true;
+    },
     submitForm() {
       if (this.isFormValid) {
+        this.modalSuccess = true;
+        this.bases = false;
+        this.spiner = true;
+        setTimeout(() => {
+          this.spiner = false;
+          this.modalCupom = true;
+        }, 3000);
+       
         console.log("Form submitted");
       }
     },
@@ -89,6 +122,29 @@ export default {
       <PopupContainer />
       <PopupHelp />
       <PopupButtons :openModal="openModal" />
+
+
+      <div v-if="modalSuccess" class="modal">
+        <div class="w-1/4 bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
+          <div v-if="spiner" class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
+          </div>
+          <div v-if="modalCupom">
+            <div class="flex justify-between">
+              <p class="font-black text-base text-white">SEU CUPOM</p>
+              <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="fechar" />
+            </div>
+            <div class="grid start mt-2">
+              <button @click="copiarNumero">
+                <img class="w-7" @click="hiddenCut" v-if="cutCode" src="../assets/images/cut.svg" alt="cortar">
+                <img class="w-7" v-else-if="pastCode" src="../assets/images/paste.svg" alt="">
+              </button>
+              <p class="text-start mt-2 text-white text-sm">{{ numero }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
@@ -232,6 +288,10 @@ export default {
 </template>
 
 <style scoped>
+
+.minei {
+  z-index: 999;
+}
 .my-data {
   transition: ease-in-out 0.3s;
 }
