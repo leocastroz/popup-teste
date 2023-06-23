@@ -7,6 +7,8 @@ import jsonData from "../data/popupConfig";
 import PopupButtons from "./PopupButtons.vue";
 import GenderSelect from "./GenderSelect.vue";
 import MyModal from "./MyModal.vue";
+import PopupHeaderModal from "./PopupHeaderModal.vue";
+import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
 
 export default {
   components: {
@@ -16,6 +18,8 @@ export default {
     PopupButtons,
     GenderSelect,
     MyModal,
+    PopupHeaderModal,
+    PopupHeaderModalTwo,
   },
   data() {
     return {
@@ -143,21 +147,8 @@ export default {
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
-
-
             <div class="dates py-2 px-5">
-              <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base my-5">
-                  {{ config.title }}
-                </h2>
-                <img :src="config.close" alt="close" class="close cursor-pointer w-5"  @click="closeIn" />
-              </div>
-              <p class="introdution">{{ config.subtitle }}</p>
-              <div class="w-full flex justify-center">
-                <img :src="config.videoURL" alt="GIF" class="w-40" />
-              </div>
-
-
+              <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
@@ -227,17 +218,8 @@ export default {
         <div v-if="showFormModal && isModalOpen('form')" class="modal">
           <div class="after-modal">
             <div class="dates py-2 px-10">
-              <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base my-5">
-                  {{ config.title }}
-                </h2>
-                <img :src="config.close" alt="close" class="close cursor-pointer w-5"   @click="closeModal('form')" />
-              </div>
-              <p class="introdution">{{ config.subtitle }}</p>
-
-              <div class="w-full flex justify-center">
-                <img :src="config.videoURL" alt="GIF" class="w-40" />
-              </div>
+            
+                <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
 
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
