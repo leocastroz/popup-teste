@@ -9,6 +9,8 @@ import GenderSelect from "./GenderSelect.vue";
 import MyModal from "./MyModal.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
+import VideoSection from "./VideoSection.vue";
+import VideoSectionTwo from "./VideoSectionTwo.vue";
 
 export default {
   components: {
@@ -20,6 +22,8 @@ export default {
     MyModal,
     PopupHeaderModal,
     PopupHeaderModalTwo,
+    VideoSection,
+    VideoSectionTwo,
   },
   data() {
     return {
@@ -48,78 +52,82 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.bases = true
-    }, 1000)
+      this.bases = true;
+    }, 1000);
   },
   computed: {
     isFormValid() {
-      const requiredFields = this.config.formFields.filter((field) => field.required)
-      const filledFields = this.formValues.filter((value) => value !== "")
-      const allRequiredFieldsFilled = requiredFields.length === filledFields.length
-      const consentChecked = !this.config.consentCheckbox || this.consentChecked
-      return allRequiredFieldsFilled && consentChecked
+      const requiredFields = this.config.formFields.filter(
+        (field) => field.required
+      );
+      const filledFields = this.formValues.filter((value) => value !== "");
+      const allRequiredFieldsFilled =
+        requiredFields.length === filledFields.length;
+      const consentChecked =
+        !this.config.consentCheckbox || this.consentChecked;
+      return allRequiredFieldsFilled && consentChecked;
     },
   },
   methods: {
     copiarNumero() {
       if (!this.exibirColar) {
-        const el = document.createElement("textarea")
-        el.value = this.cupom
-        document.body.appendChild(el)
-        el.select()
-        document.execCommand("copy")
-        document.body.removeChild(el)
-        this.exibirColar = true
+        const el = document.createElement("textarea");
+        el.value = this.cupom;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        this.exibirColar = true;
       }
     },
     closeIn() {
       this.bases = false;
-      this.showSecondModal = true
+      this.showSecondModal = true;
     },
     openModal(name) {
       if (!this.isModalOpen(name)) {
-        this.openModals.push(name)
+        this.openModals.push(name);
       }
     },
     openSecondModal() {
-      this.showSecondModal = true
+      this.showSecondModal = true;
     },
     closeSeconde() {
-      this.showSecondModal = false
+      this.showSecondModal = false;
     },
     closeNow() {
-      this.modalSuccess = false
-      location.reload()
+      this.modalSuccess = false;
+      location.reload();
     },
     closeModal(name) {
-      const index = this.openModals.indexOf(name)
+      const index = this.openModals.indexOf(name);
       if (index !== -1) {
-        this.openModals.splice(index, 1)
+        this.openModals.splice(index, 1);
       }
     },
     isModalOpen(name) {
-      return this.openModals.includes(name)
+      return this.openModals.includes(name);
     },
     hiddenCut() {
-      this.cutCode = false
-      this.pastCode = true
+      this.cutCode = false;
+      this.pastCode = true;
     },
     submitForm() {
       if (this.isFormValid) {
-        this.modalSuccess = true
-        this.bases = false
-        this.showFormModal = false
-        this.showSecondModal = false
-        this.showSecondFormModal = false
-        this.spinerLoading = true
+        this.modalSuccess = true;
+        this.bases = false;
+        this.showFormModal = false;
+        this.showSecondModal = false;
+        this.showSecondFormModal = false;
+        this.spinerLoading = true;
         setTimeout(() => {
-          this.spinerLoading = false
-          this.modalCupom = true
-        }, 3000)
+          this.spinerLoading = false;
+          this.modalCupom = true;
+        }, 3000);
       }
     },
   },
-}
+};
 </script>
 
 <template>
@@ -129,7 +137,6 @@ export default {
       <PopupContainer />
       <PopupHelp />
       <PopupButtons :openModal="openModal" />
-
       <div v-if="modalSuccess" class="modal">
         <MyModal
           :config="config"
@@ -143,12 +150,15 @@ export default {
           @hidden-cut="hiddenCut"
         />
       </div>
-
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
             <div class="dates py-2 px-5">
-              <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
+              <PopupHeaderModal
+                :config="config"
+                @close-in="closeIn"
+                v-if="true"
+              />
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
@@ -181,15 +191,19 @@ export default {
                   />
                 </div>
                 <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2  text-xs">{{
-                    config.shareData
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.shareData }}</label
+                  >
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.acceptTerms
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.acceptTerms }}</label
+                  >
                   <input
                     type="checkbox"
                     id="consentCheckbox"
@@ -208,18 +222,15 @@ export default {
                   {{ config.send }}
                 </button>
               </form>
-
             </div>
           </div>
         </div>
       </transition>
-
       <transition name="modal-transition">
         <div v-if="showFormModal && isModalOpen('form')" class="modal">
           <div class="after-modal">
             <div class="dates py-2 px-10">
-            
-                <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
+              <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
 
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
@@ -253,15 +264,19 @@ export default {
                   />
                 </div>
                 <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.shareData
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.shareData }}</label
+                  >
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.acceptTerms
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.acceptTerms }}</label
+                  >
                   <input
                     type="checkbox"
                     id="consentCheckbox"
@@ -287,19 +302,8 @@ export default {
       <transition name="modal-transition">
         <div v-if="showSecondFormModal && isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 max-w-sm">
-            <div class="register flex justify-between mt-5">
-              <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img :src="config.close" alt="GIF" class="close cursor-pointer w-5" @click="closeModal('news')" />
-            </div>
+            <VideoSectionTwo :config="config" @closeModal="closeModal" />
             <div class="text-white">
-              <p class="mt-3 mb-5 text-justify text-white text-sm">
-                {{ config.video.descriptionVideo }}
-              </p>
-              <div class="flex items-center justify-center">
-                <video controls class="w-11/12 rounded">
-                  <source :src="config.video.videoURL" type="video/mp4" />
-                </video>
-              </div>
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
@@ -323,7 +327,9 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between text-sm">
+                <div
+                  class="my-genders flex items-center flex justify-between text-sm"
+                >
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
@@ -332,15 +338,19 @@ export default {
                   />
                 </div>
                 <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.shareData
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.shareData }}</label
+                  >
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.acceptTerms
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.acceptTerms }}</label
+                  >
                   <input
                     type="checkbox"
                     id="consentCheckbox"
@@ -366,19 +376,8 @@ export default {
       <transition name="modal-transition">
         <div v-if="showSecondModal" class="modal">
           <div class="video-modal text-white px-5 max-w-sm">
-            <div class="register flex justify-between mt-5">
-              <h2 class="text-base font-black">{{ config.video.title }}</h2>
-              <img :src="config.close" alt="GIF" class="close cursor-pointer w-5"  @click="closeSeconde" />
-            </div>
-            <div class="text-white">
-              <p class="mt-3 mb-5 text-justify text-white text-sm">
-                {{ config.video.descriptionVideo }}
-              </p>
-              <div class="flex items-center justify-center">
-                <video controls class="w-11/12 rounded">
-                  <source :src="config.video.videoURL" type="video/mp4" />
-                </video>
-              </div>
+            <VideoSection :config="config" @closeSecondModal="closeSeconde" />
+            <div class="text-black">
               <form @submit.prevent="submitForm">
                 <p class="register font-bold text-lg py-3">
                   {{ config.titleForms }}
@@ -402,7 +401,9 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between text-sm">
+                <div
+                  class="my-genders flex items-center flex justify-between text-sm"
+                >
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
@@ -411,15 +412,19 @@ export default {
                   />
                 </div>
                 <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.shareData
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.shareData }}</label
+                  >
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
-                    config.acceptTerms
-                  }}</label>
+                  <label
+                    for="consentCheckbox"
+                    class="text-violet-300 pr-2 text-xs"
+                    >{{ config.acceptTerms }}</label
+                  >
                   <input
                     type="checkbox"
                     id="consentCheckbox"
