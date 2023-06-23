@@ -1,4 +1,5 @@
 <script>
+import "../assets/config/popup.css";
 import PopupHeader from "./PopupHeader.vue";
 import PopupContainer from "./PopupContainer.vue";
 import PopupHelp from "./PopupHelp.vue";
@@ -141,7 +142,7 @@ export default {
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base">
+                <h2 class="dates-title font-black text-base my-5">
                   {{ config.title }}
                 </h2>
                 <img
@@ -224,7 +225,7 @@ export default {
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
-                <h2 class="dates-title font-black text-base">
+                <h2 class="dates-title font-black text-base my-5">
                   {{ config.title }}
                 </h2>
                 <img
@@ -306,7 +307,7 @@ export default {
       <transition name="modal-transition">
         <div v-if="isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 py-8">
-            <div class="flex justify-between">
+            <div class="register flex justify-between">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
               <img
                 class="close cursor-pointer w-5"
@@ -315,9 +316,8 @@ export default {
                 @click="closeModal('news')"
               />
             </div>
-            <h1>UNITARIO</h1>
-            <div class="text-white py-8">
-              <p class="mt-3 mb-5 text-center text-purple-400">
+            <div class="text-white">
+              <p class="mt-3 mb-5 text-justify text-white text-sm">
                 {{ config.video.descriptionVideo }}
               </p>
               <div class="flex items-center justify-center">
@@ -348,22 +348,22 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between">
+                <div class="my-genders flex items-center flex justify-between text-sm">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
                     :selectedGender.sync="selectedGender"
-                    class="mr-36"
+                    class="mr-36 pl-3"
                   />
                 </div>
-                <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                <div class="pt-3">
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.shareData
                   }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.acceptTerms
                   }}</label>
                   <input
@@ -390,8 +390,8 @@ export default {
       </transition>
       <transition name="modal-transition">
         <div v-if="showSecondModal" class="modal">
-          <div class="video-modal text-white px-5 py-8">
-            <div class="flex justify-between">
+          <div class="video-modal text-white px-5">
+            <div class="register flex justify-between px-5 mt-5">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
               <img
                 class="close cursor-pointer w-5"
@@ -401,7 +401,7 @@ export default {
               />
             </div>
             <div class="text-white py-8">
-              <p class="mt-3 mb-5 text-center text-purple-400">
+              <p class="mt-3 mb-5 text-justify px-5 text-white text-sm">
                 {{ config.video.descriptionVideo }}
               </p>
               <div class="flex items-center justify-center">
@@ -475,99 +475,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped>
-.my-data {
-  transition: ease-in-out 0.3s;
-}
-
-.modal-transition-enter-active,
-.modal-transition-leave-active {
-  transition: opacity 0.3s;
-}
-
-.modal-transition-enter,
-.modal-transition-leave-to {
-  opacity: 0;
-}
-
-.modal-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal {
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: #00000098;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.video-modal {
-  max-width: 400px;
-  min-height: 500px;
-  position: absolute;
-  background-color: rgb(47, 33, 60);
-  border-radius: 10px;
-  text-align: start;
-  border: 3px solid #a501fe;
-}
-
-.after-modal {
-  min-width: 400px;
-  min-height: 500px;
-  position: absolute;
-  background-color: rgb(47, 33, 60);
-  border-radius: 10px;
-  color: #fff;
-  text-align: start;
-  border: 3px solid #a501fe;
-}
-
-.dates .dates-title {
-  background: linear-gradient(270deg, #d890ff 0%, #9200e0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 20px 0;
-}
-
-.dates .introdution {
-  font-size: 13px;
-  width: 350px;
-  text-align: justify;
-  margin-bottom: 20px;
-  letter-spacing: 0.2px;
-  color: #949494;
-}
-
-.close {
-  transition: transform 0.3s ease;
-}
-
-.close:hover {
-  transform: rotate(45deg);
-}
-
-.register {
-  background: linear-gradient(270deg, #d890ff 0%, #9200e0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-</style>

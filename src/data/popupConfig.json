@@ -27,7 +27,7 @@
         "subtitle": "Descrição do vídeo",
         "fields": 3,
         "consentCheckbox": false,
-        "descriptionVideo": "Confira as melhores jogadas",
+        "descriptionVideo": "Jogue agora e ganhe um cupom de 10% de desconto para usar em qualquer produto da loja!",
         "videoURL": "https://github.com/leocastroz/magic-QRcode-vue3/assets/72839343/e740ab25-abf2-496f-8d1c-4de9d60665f7",
         "formFields": [
           { "label": "Email", "type": "email" },
