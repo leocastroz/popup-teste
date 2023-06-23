@@ -26,10 +26,11 @@ export default {
       selectedGender: "",
       modalSuccess: false,
       spiner: false,
-      numero: 'https://github.com/leocastroz',
+      cupom: 'https://github.com/leocastroz',
       cutCode: true,
       pastCode: false,
       modalCupom: false,
+      showFormModal: true,
     };
   },
   props: {
@@ -102,6 +103,7 @@ export default {
       if (this.isFormValid) {
         this.modalSuccess = true;
         this.bases = false;
+        this.showFormModal = false; 
         this.spiner = true;
         setTimeout(() => {
           this.spiner = false;
@@ -122,15 +124,13 @@ export default {
       <PopupContainer />
       <PopupHelp />
       <PopupButtons :openModal="openModal" />
-
-
       <div v-if="modalSuccess" class="modal">
-        <div class="w-1/4 bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
+        <div class="w-1/2 w-max bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
           <div v-if="spiner" class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
           </div>
           <div v-if="modalCupom">
             <div class="flex justify-between">
-              <p class="font-black text-base text-white">SEU CUPOM</p>
+              <p class="font-black text-base text-white">{{config.titleCupom}}</p>
               <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="fechar" />
             </div>
             <div class="grid start mt-2">
@@ -138,13 +138,12 @@ export default {
                 <img class="w-7" @click="hiddenCut" v-if="cutCode" src="../assets/images/cut.svg" alt="cortar">
                 <img class="w-7" v-else-if="pastCode" src="../assets/images/paste.svg" alt="">
               </button>
-              <p class="text-start mt-2 text-white text-sm">{{ numero }}</p>
+              <p class="text-start mt-2 text-white text-sm">{{ cupom }}</p>
             </div>
           </div>
         </div>
       </div>
-
-
+      
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
@@ -170,22 +169,22 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">Gênero</p>
+                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">gostaria de compartilhar seus dados ?</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">aceitar os Termos</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
                 <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
                   'bg-red-400': !isFormValid,
                   'bg-green-400': isFormValid,
                 }" type="submit" :disabled="!isFormValid">
-                  Enviar
+                {{ config.send }}
                 </button>
               </form>
             </div>
@@ -194,7 +193,7 @@ export default {
       </transition>
 
       <transition name="modal-transition">
-        <div v-if="isModalOpen('form')" class="modal">
+        <div v-if="showFormModal && isModalOpen('form')" class="modal">
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
@@ -221,22 +220,22 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
                 <div class="my-genders flex items-center flex justify-between">
-                  <p class="text-violet-300 pr-2">Gênero</p>
+                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
                 <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">gostaria de compartilhar seus dados ?</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">aceitar os Termos</label>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
                   <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
                 <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
                   'bg-red-400': !isFormValid,
                   'bg-green-400': isFormValid,
                 }" type="submit" :disabled="!isFormValid">
-                  Enviar
+                  {{ config.send }}
                 </button>
               </form>
             </div>
@@ -252,7 +251,7 @@ export default {
             </div>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">
-                Confira as melhores jogadas 🎆
+                {{ config.video.descriptionVideo }}
               </p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">
@@ -272,7 +271,7 @@ export default {
             </div>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">
-                Confira as melhores jogadas 🎆
+                {{ config.video.descriptionVideo }}
               </p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">

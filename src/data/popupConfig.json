@@ -4,13 +4,19 @@
       "subtitle": "Caça-níquel, caça-níqueis ou slot machine é uma máquina de jogo que funciona por meio da introdução de moedas e que paga um prêmio, igualmente em moedas ou com a emissão de um voucher, a quem acertar as combinações previstas.",
       "fields": 2,
       "consentCheckbox": true,
+      "shareData": "gostaria de compartilhar seus dados ?",
+      "acceptTerms": "aceitar os Termos",
       "videoURL": "https://github.com/leocastroz/user-panel-vue3/assets/72839343/b25407fe-f48a-4455-8d4f-7aab7a5f7b78",
       "titleForms": "# Cadastre-se agora",
+      "close": "https://github.com/leocastroz/portfollio-main/assets/72839343/1b1556dd-ff1a-4a91-a41a-6176c9b6c440",
+      "titleCupom": "SEU CUPOM",
+      "send": "Enviar",
       "formFields": [
         { "label": "Seu e-mail", "type": "email" },
         { "label": "Seu nome", "type": "text" },
         { "label": "Número +DDD", "type": "tel" }
       ],
+      "titleGender": "Gênero",
       "gender": [
         { "label": "Masculino", "type": "email" },
         { "label": "Feminino", "type": "text" },
@@ -21,6 +27,7 @@
         "subtitle": "Descrição do vídeo",
         "fields": 3,
         "consentCheckbox": false,
+        "descriptionVideo": "Confira as melhores jogadas",
         "videoURL": "https://github.com/leocastroz/magic-QRcode-vue3/assets/72839343/e740ab25-abf2-496f-8d1c-4de9d60665f7",
         "formFields": [
           { "label": "Email", "type": "email" },
