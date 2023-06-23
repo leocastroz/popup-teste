@@ -168,7 +168,7 @@ export default {
                 v-if="true"
               />
               <form @submit.prevent="submitForm">
-                <p class="font-bold text-lg py-3 text-emerald-200">
+                <p class="font-bold text-lg py-3 text-blue-300">
                   {{ config.titleForms }}
                 </p>
                 <div

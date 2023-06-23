@@ -9,7 +9,7 @@
         @click="closeModal('news')"
       />
     </div>
-    <p class="mt-3 mb-5 text-xs/[15px] text-justify pb-4 text-purple-300">
+    <p class="mt-3 mb-5 text-xs/[15px] text-justify pb-4 text-blue-300">
       {{ config.video.descriptionVideo }}
     </p>
     <div class="flex items-center justify-center">

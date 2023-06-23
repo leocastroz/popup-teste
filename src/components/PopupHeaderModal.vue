@@ -11,7 +11,7 @@
         @click="closeIn"
       />
     </div>
-    <p class="text-xs/[15px] text-justify pb-4 text-emerald-200">{{ config.subtitle }}</p>
+    <p class="text-xs/[15px] text-justify pb-4 text-blue-300">{{ config.subtitle }}</p>
     <div class="w-full flex justify-center">
       <img :src="config.videoURL" alt="GIF" class="w-40" />
     </div>
