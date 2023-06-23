@@ -7,12 +7,12 @@
 		<div v-if="modalCupom">
 			<div class="flex justify-between">
 				<p class="font-black text-base text-white">{{ config.titleCupom }}</p>
-				<img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="close" />
+				<img class="close cursor-pointer w-5" :src="config.close" alt="fechar" @click="close" />
 			</div>
 			<div class="grid start mt-2">
 				<button @click="copiarNumero">
-					<img class="w-7" @click="hiddenCut" v-if="cutCode" src="../assets/images/cut.svg" alt="cortar" />
-					<img class="w-7" v-else-if="pastCode" src="../assets/images/paste.svg" alt="" />
+					<img class="w-7" @click="hiddenCut" v-if="cutCode" :src="config.cut" alt="cortar" />
+					<img class="w-7" v-else-if="pastCode" :src="config.paste" alt="colar" />
 				</button>
 				<p class="text-start mt-2 text-white text-sm">{{ cupom }}</p>
 			</div>

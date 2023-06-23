@@ -10,7 +10,10 @@
       "titleForms": "# Cadastre-se agora",
       "close": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
       "titleCupom": "SEU CUPOM",
+      "cut": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248302484-1d95cd06-575f-4336-83a4-591114a0750b.svg",
+      "paste": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248302656-6ea12aab-1d96-40ab-9831-16ff2936a7cc.svg",
       "send": "Enviar",
+      "buttonText1": "texto",
       "formFields": [
         { "label": "Seu e-mail", "type": "email" },
         { "label": "Seu nome", "type": "text" },
