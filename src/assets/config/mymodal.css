@@ -1,0 +1,7 @@
+.close {
+    transition: transform 0.3s ease;
+  }
+  
+  .close:hover {
+    transform: rotate(45deg);
+  }
