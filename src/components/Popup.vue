@@ -25,7 +25,7 @@ export default {
       showSecondModal: false,
       selectedGender: "",
       modalSuccess: false,
-      spiner: false,
+      spinerLoading: false,
       cupom: 'https://github.com/leocastroz',
       cutCode: true,
       pastCode: false,
@@ -59,7 +59,7 @@ export default {
     copiarNumero() {
       if (!this.exibirColar) {
         const el = document.createElement('textarea');
-        el.value = this.numero;
+        el.value = this.cupom;
         document.body.appendChild(el);
         el.select();
         document.execCommand('copy');
@@ -103,10 +103,10 @@ export default {
       if (this.isFormValid) {
         this.modalSuccess = true;
         this.bases = false;
-        this.showFormModal = false; 
-        this.spiner = true;
+        this.showFormModal = false;
+        this.spinerLoading = true;
         setTimeout(() => {
-          this.spiner = false;
+          this.spinerLoading = false;
           this.modalCupom = true;
         }, 3000);
        
@@ -126,7 +126,7 @@ export default {
       <PopupButtons :openModal="openModal" />
       <div v-if="modalSuccess" class="modal">
         <div class="w-1/2 w-max bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
-          <div v-if="spiner" class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
+          <div v-if="spinerLoading" class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
           </div>
           <div v-if="modalCupom">
             <div class="flex justify-between">
@@ -143,7 +143,7 @@ export default {
           </div>
         </div>
       </div>
-      
+
       <transition name="modal-transition">
         <div v-if="bases" class="modal">
           <div class="after-modal">
@@ -249,6 +249,7 @@ export default {
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
               <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')" />
             </div>
+            <h1>UNITARIO</h1>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">
                 {{ config.video.descriptionVideo }}
@@ -258,6 +259,35 @@ export default {
                   <source :src="config.video.videoURL" type="video/mp4" />
                 </video>
               </div>
+              <form @submit.prevent="submitForm">
+                <p class="register font-bold text-lg py-3">
+                  {{ config.titleForms }}
+                </p>
+                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                </div>
+                <div class="my-genders flex items-center flex justify-between">
+                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                </div>
+                <div>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <input type="checkbox" v-model="dataChecked" />
+                </div>
+                <div v-if="config.consentCheckbox" class="my-2">
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                </div>
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
+                  'bg-red-400': !isFormValid,
+                  'bg-green-400': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
+                  {{ config.send }}
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -278,6 +308,35 @@ export default {
                   <source :src="config.video.videoURL" type="video/mp4" />
                 </video>
               </div>
+              <form @submit.prevent="submitForm">
+                <p class="register font-bold text-lg py-3">
+                  {{ config.titleForms }}
+                </p>
+                <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
+                </div>
+                <div class="my-genders flex items-center flex justify-between">
+                  <p class="text-violet-300 pr-2">{{config.titleGender}}</p>
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
+                </div>
+                <div>
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.shareData}}</label>
+                  <input type="checkbox" v-model="dataChecked" />
+                </div>
+                <div v-if="config.consentCheckbox" class="my-2">
+                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{config.acceptTerms}}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
+                </div>
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold" :class="{
+                  'bg-red-400': !isFormValid,
+                  'bg-green-400': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
+                  {{ config.send }}
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -288,9 +347,6 @@ export default {
 
 <style scoped>
 
-.minei {
-  z-index: 999;
-}
 .my-data {
   transition: ease-in-out 0.3s;
 }
