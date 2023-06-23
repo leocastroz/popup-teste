@@ -89,7 +89,7 @@ export default {
           <div class="after-modal">
             <div class="dates py-2 px-5">
               <div class="flex justify-between">
-                <h2 class="dates-title text-base">{{ config.title }}</h2>
+                <h2 class="dates-title font-black text-base">{{ config.title }}</h2>
                 <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closess">
               </div>
               <p class="introdution">{{ config.subtitle }}</p>
@@ -97,7 +97,7 @@ export default {
                 <img :src="config.videoURL" alt="GIF" class="w-48">
               </div>
               <form @submit.prevent="submitForm">
-                <p class="register">{{ config.titleForms }}</p>
+                <p class="register font-bold text-lg py-3">{{ config.titleForms }}</p>
                 <div v-for="(field, index) in config.formFields" :key="index" class=" bg-black-100">
                   <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
                   <input :type="field.type" :id="'field' + index" :value="field.value"
@@ -150,14 +150,14 @@ export default {
         <div v-if="isModalOpen('news')" class="modal">
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
-              <h2 class="text-base font-black">CONFIRA O VÍDEO</h2>
+              <h2 class="text-base font-black">{{config.video.title}}</h2>
               <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeModal('news')">
             </div>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">
-                  <source :src="config.videoBaseURL" type="video/mp4">
+                  <source :src="config.video.videoURL" type="video/mp4">
                 </video>
               </div>
             </div>
@@ -168,14 +168,14 @@ export default {
         <div v-if="showSecondModal" class="modal">
           <div class="video-modal text-white px-5 py-8">
             <div class="flex justify-between">
-              <h2 class="text-base font-black">CONFIRA O VÍDEO</h2>
+              <h2 class="text-base font-black">{{config.video.title}}</h2>
               <img class="close cursor-pointer w-5" src="../assets/images/close.svg" alt="" @click="closeSeconde">
             </div>
             <div class="text-white py-8">
               <p class="mt-3 mb-5 text-center text-purple-400">Confira as melhores jogadas 🎆</p>
               <div class="flex items-center justify-center">
                 <video controls class="w-11/12 rounded">
-                  <source :src="config.videoBaseURL" type="video/mp4">
+                  <source :src="config.video.videoURL" type="video/mp4">
                 </video>
               </div>
             </div>
