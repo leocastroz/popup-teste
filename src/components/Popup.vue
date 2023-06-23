@@ -306,8 +306,8 @@ export default {
       </transition>
       <transition name="modal-transition">
         <div v-if="isModalOpen('news')" class="modal">
-          <div class="video-modal text-white px-5 py-8">
-            <div class="register flex justify-between">
+          <div class="video-modal text-white px-5 max-w-sm">
+            <div class="register flex justify-between mt-5">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
               <img
                 class="close cursor-pointer w-5"
@@ -390,8 +390,8 @@ export default {
       </transition>
       <transition name="modal-transition">
         <div v-if="showSecondModal" class="modal">
-          <div class="video-modal text-white px-5">
-            <div class="register flex justify-between px-5 mt-5">
+          <div class="video-modal text-white px-5 max-w-sm">
+            <div class="register flex justify-between mt-5">
               <h2 class="text-base font-black">{{ config.video.title }}</h2>
               <img
                 class="close cursor-pointer w-5"
@@ -400,8 +400,8 @@ export default {
                 @click="closeSeconde"
               />
             </div>
-            <div class="text-white py-8">
-              <p class="mt-3 mb-5 text-justify px-5 text-white text-sm">
+            <div class="text-white">
+              <p class="mt-3 mb-5 text-justify text-white text-sm">
                 {{ config.video.descriptionVideo }}
               </p>
               <div class="flex items-center justify-center">
@@ -432,22 +432,22 @@ export default {
                     class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
                   />
                 </div>
-                <div class="my-genders flex items-center flex justify-between">
+                <div class="my-genders flex items-center flex justify-between text-sm">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect
                     :options="config.gender"
                     :selectedGender.sync="selectedGender"
-                    class="mr-36"
+                    class="mr-36 pl-3"
                   />
                 </div>
-                <div>
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                <div class="pt-3">
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.shareData
                   }}</label>
                   <input type="checkbox" v-model="dataChecked" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2">{{
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.acceptTerms
                   }}</label>
                   <input
