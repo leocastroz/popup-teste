@@ -22,7 +22,6 @@ export default {
       openModals: [],
       formValues: [],
       consentChecked: true,
-      dataChecked: true,
       bases: false,
       jsonData,
       showSecondModal: false,
@@ -194,7 +193,7 @@ export default {
                   <label for="consentCheckbox" class="text-violet-300 pr-2  text-xs">{{
                     config.shareData
                   }}</label>
-                  <input type="checkbox" v-model="dataChecked" />
+                  <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
@@ -275,7 +274,7 @@ export default {
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.shareData
                   }}</label>
-                  <input type="checkbox" v-model="dataChecked" />
+                  <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
@@ -354,7 +353,7 @@ export default {
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.shareData
                   }}</label>
-                  <input type="checkbox" v-model="dataChecked" />
+                  <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
@@ -433,7 +432,7 @@ export default {
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
                     config.shareData
                   }}</label>
-                  <input type="checkbox" v-model="dataChecked" />
+                  <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
                   <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{
