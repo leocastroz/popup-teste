@@ -1,8 +1,7 @@
 <template>
-	<div
-		class="w-1/2 w-max bg-gradient-to-r from-emerald-500 to-green-800 p-10 rounded-lg flex items-center justify-center">
+	<div class="modal-success  w-1/2 w-max p-10 rounded-lg flex items-center justify-center">
 		<div v-if="spinerLoading"
-			class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-green-800 to-black">
+			class="animate-spin rounded-full h-10 w-10 border-dashed border-2 border-white border-t-5 border-b-2 bg-gradient-to-r from-blue-300 to-blue-500">
 		</div>
 		<div v-if="modalCupom">
 			<div class="flex justify-between">
@@ -14,7 +13,7 @@
 					<img class="w-7" @click="hiddenCut" v-if="cutCode" :src="config.cut" alt="cortar" />
 					<img class="w-7" v-else-if="pastCode" :src="config.paste" alt="colar" />
 				</button>
-				<p class="text-start mt-2 text-white text-sm">{{ cupom }}</p>
+				<p class="text-start mt-2 text-blue-200 text-sm">{{ cupom }}</p>
 			</div>
 		</div>
 	</div>

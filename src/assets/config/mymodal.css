@@ -1,7 +1,12 @@
 .close {
-    transition: transform 0.3s ease;
-  }
-  
-  .close:hover {
-    transform: rotate(45deg);
-  }
+  transition: transform 0.3s ease;
+}
+
+.close:hover {
+  transform: rotate(45deg);
+}
+
+.modal-success {
+  background-image: url(../../assets/images/second-background.svg);
+  border: 3px solid #01b6fe;
+}
