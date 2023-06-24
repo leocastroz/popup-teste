@@ -11,6 +11,8 @@ import PopupHeaderModal from "./PopupHeaderModal.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
 import VideoSection from "./VideoSection.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
+import Button from "./Button.vue";
+import CheckInput from "./CheckInput.vue";
 
 export default {
   components: {
@@ -24,6 +26,8 @@ export default {
     PopupHeaderModalTwo,
     VideoSection,
     VideoSectionTwo,
+    Button,
+    CheckInput
   },
   data() {
     return {
@@ -150,7 +154,7 @@ export default {
             <div class="py-2 px-5">
               <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
               <form @submit.prevent="submitForm">
-                <p class="font-bold text-lg py-3 text-blue-300">
+                <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
                 <div v-for="(field, index) in config.formFields" :key="index"
@@ -164,20 +168,19 @@ export default {
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
-                <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
-                  <input type="checkbox" />
-                </div>
-                <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
-                </div>
-                <button class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
-                  'bg-black': !isFormValid,
-                  'bg-emerald-200': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
-                  {{ config.send }}
-                </button>
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.shareData"
+                />
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.acceptTerms"
+                  :checked="consentChecked"
+                  @update:checked="consentChecked = $event"
+                />
+                <Button :is-form-valid="isFormValid" button-text="Enviar" />
               </form>
             </div>
           </div>
@@ -204,20 +207,19 @@ export default {
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
-                <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
-                  <input type="checkbox" />
-                </div>
-                <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
-                </div>
-                <button class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
-                  'bg-black': !isFormValid,
-                  'bg-emerald-200': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
-                  {{ config.send }}
-                </button>
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.shareData"
+                />
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.acceptTerms"
+                  :checked="consentChecked"
+                  @update:checked="consentChecked = $event"
+                />
+                <Button :is-form-valid="isFormValid" button-text="Enviar" />
               </form>
             </div>
           </div>
@@ -228,7 +230,6 @@ export default {
           class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSectionTwo :config="config" @closeModal="closeModal" />
-            <div class="text-white">
               <form @submit.prevent="submitForm">
                 <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
@@ -244,22 +245,20 @@ export default {
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
                 </div>
-                <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
-                  <input type="checkbox" />
-                </div>
-                <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
-                </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
-                  'bg-black': !isFormValid,
-                  'bg-emerald-200': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
-                  {{ config.send }}
-                </button>
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.shareData"
+                />
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.acceptTerms"
+                  :checked="consentChecked"
+                  @update:checked="consentChecked = $event"
+                />
+                <Button :is-form-valid="isFormValid" button-text="Enviar" />
               </form>
-            </div>
           </div>
         </div>
       </transition>
@@ -268,7 +267,6 @@ export default {
           class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSection :config="config" @closeSecondModal="closeSeconde" />
-            <div class="text-black">
               <form @submit.prevent="submitForm">
                 <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
@@ -284,22 +282,20 @@ export default {
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                   <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
                 </div>
-                <div class="pt-3">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
-                  <input type="checkbox" />
-                </div>
-                <div v-if="config.consentCheckbox" class="my-2">
-                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
-                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
-                </div>
-                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
-                  'bg-black': !isFormValid,
-                  'bg-emerald-200': isFormValid,
-                }" type="submit" :disabled="!isFormValid">
-                  {{ config.send }}
-                </button>
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.shareData"
+                />
+                <CheckInput
+                  v-if="config.consentCheckbox"
+                  inputId="consentCheckbox"
+                  :label="config.acceptTerms"
+                  :checked="consentChecked"
+                  @update:checked="consentChecked = $event"
+                />
+                <Button :is-form-valid="isFormValid" button-text="Enviar" />
               </form>
-            </div>
           </div>
         </div>
       </transition>
