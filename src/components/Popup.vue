@@ -132,8 +132,8 @@ export default {
 
 <template>
   <div v-if="config">
-    <PopupHeader />
-    <PopupButtons :openModal="openModal" />
+    <PopupHeader :config="config" />
+    <PopupButtons :config="config" :openModal="openModal" />
     <div v-if="modalSuccess"
       class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
       <MyModal :config="config" :spiner-loading="spinerLoading" :modal-cupom="modalCupom" :cupom="cupom"

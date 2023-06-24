@@ -1,5 +1,14 @@
   {
-    "caça-níquel": {
+    "slot-machine": {
+      "homePage": {
+        "title": "POPUP - CONVERT",
+        "subTitle": "BEM-VINDO Á POPUP",
+        "description": "Esse é um componente de popup genérico, que pode ser usado para exibir qualquer onteúdo.",
+        "subDescription": "Caso deseje ver novamente os Popups, basta clicar nestes botões para abrir e fechar a modal das Popups.",
+        "buttonAbout": "SOBRE O JOGO",
+        "watchVideo": "VER VÍDEO",
+        "playerVideo": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248517878-4e26a36b-56f7-4b5a-b3a6-7a8dcad66e23.svg"
+      },
       "title": "POPUP DO CAÇA-NÍQUEL",
       "subtitle": "Caça-níquel, caça-níqueis ou slot machine é uma máquina de jogo que funciona por meio da introdução de moedas e que paga um prêmio, igualmente em moedas ou com a emissão de um voucher, a quem acertar as combinações previstas.",
       "fields": 2,

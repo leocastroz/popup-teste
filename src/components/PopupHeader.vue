@@ -2,10 +2,10 @@
   <div class="text-center pt-20 pb-10 grid justify-center items-center">
     <div class="flex items-center">
       <img :src="img" alt="hand" class="w-12">
-      <h1 class="text-2xl font-black text-white px-3">{{title}}</h1>
+      <h1 class="text-2xl font-black text-white px-3">{{config.homePage.title}}</h1>
     </div>
-    <PopupContainer />
-    <PopupHelp />
+    <PopupContainer :config="config" />
+    <PopupHelp :config="config" />
   </div>
 </template>
 
@@ -17,9 +17,14 @@ export default {
     PopupContainer,
     PopupHelp,
   },
+  props: {
+    config: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      title: 'POPUP - POPCONVERT',
       img: 'https://mwcorvettes.com/wp-content/uploads/2019/03/savethewave-300x252.gif'
     }
   }

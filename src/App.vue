@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popup :config="popupConfig['caça-níquel']" />
+    <Popup :config="popupConfig['slot-machine']" />
   </div>
 </template>
 
