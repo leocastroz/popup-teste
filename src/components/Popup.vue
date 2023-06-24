@@ -23,9 +23,9 @@ export default {
     GenderSelect,
     PopupHeader,
     CheckInput,
+    FormField,
     MyModal,
-    Button,
-    FormField
+    Button
   },
   data() {
     return {
@@ -53,83 +53,81 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      this.bases = true;
-    }, 1000);
+    setTimeout(() => { this.bases = true }, 1000)
   },
   computed: {
     isFormValid() {
       const requiredFields = this.config.formFields.filter(
         (field) => field.required
-      );
-      const filledFields = this.formValues.filter((value) => value !== "");
+      )
+      const filledFields = this.formValues.filter((value) => value !== "")
       const allRequiredFieldsFilled =
-        requiredFields.length === filledFields.length;
+        requiredFields.length === filledFields.length
       const consentChecked =
-        !this.config.consentCheckbox || this.consentChecked;
-      return allRequiredFieldsFilled && consentChecked;
+        !this.config.consentCheckbox || this.consentChecked
+      return allRequiredFieldsFilled && consentChecked
     },
   },
   methods: {
-    copiarNumero() {
+    copyNumber() {
       if (!this.exibirColar) {
-        const el = document.createElement("textarea");
-        el.value = this.cupom;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand("copy");
-        document.body.removeChild(el);
-        this.exibirColar = true;
+        const el = document.createElement("textarea")
+        el.value = this.cupom
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand("copy")
+        document.body.removeChild(el)
+        this.exibirColar = true
       }
     },
     closeIn() {
-      this.bases = false;
-      this.showSecondModal = true;
+      this.bases = false
+      this.showSecondModal = true
     },
     openModal(name) {
       if (!this.isModalOpen(name)) {
-        this.openModals.push(name);
+        this.openModals.push(name)
       }
     },
     openSecondModal() {
-      this.showSecondModal = true;
+      this.showSecondModal = true
     },
     closeSeconde() {
-      this.showSecondModal = false;
+      this.showSecondModal = false
     },
     closeNow() {
-      this.modalSuccess = false;
-      location.reload();
+      this.modalSuccess = false
+      location.reload()
     },
     closeModal(name) {
-      const index = this.openModals.indexOf(name);
+      const index = this.openModals.indexOf(name)
       if (index !== -1) {
-        this.openModals.splice(index, 1);
+        this.openModals.splice(index, 1)
       }
     },
     isModalOpen(name) {
-      return this.openModals.includes(name);
+      return this.openModals.includes(name)
     },
     hiddenCut() {
-      this.cutCode = false;
-      this.pastCode = true;
+      this.cutCode = false
+      this.pastCode = true
     },
     submitForm() {
       if (this.isFormValid) {
-        this.modalSuccess = true;
-        this.bases = false;
-        this.showFormModal = false;
-        this.showSecondModal = false;
-        this.showSecondFormModal = false;
-        this.spinerLoading = true;
+        this.showSecondFormModal = false
+        this.showSecondModal = false
+        this.showFormModal = false
+        this.spinerLoading = true
+        this.modalSuccess = true
+        this.bases = false
         setTimeout(() => {
-          this.spinerLoading = false;
-          this.modalCupom = true;
-        }, 3000);
+          this.spinerLoading = false
+          this.modalCupom = true
+        }, 3000)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <template>
@@ -139,14 +137,13 @@ export default {
     <div v-if="modalSuccess"
       class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
       <MyModal :config="config" :spiner-loading="spinerLoading" :modal-cupom="modalCupom" :cupom="cupom"
-        :cut-code="cutCode" :past-code="pastCode" @closeNow="closeNow" @copiar-numero="copiarNumero"
+        :cut-code="cutCode" :past-code="pastCode" @closeNow="closeNow" @copiar-numero="copyNumber"
         @hidden-cut="hiddenCut" />
     </div>
     <transition name="modal-transition">
       <div v-if="bases"
         class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
-        <div class="after-modal max-w-sm absolute text-start rounded-xl">
-          <div class="py-2 px-5">
+        <div class="after-modal max-w-sm absolute text-start rounded-xl pb-2 px-5">
             <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
             <form @submit.prevent="submitForm">
               <FormField :config="config" />
@@ -159,15 +156,13 @@ export default {
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
               <Button :is-form-valid="isFormValid" button-text="Enviar" />
             </form>
-          </div>
         </div>
       </div>
     </transition>
     <transition name="modal-transition">
       <div v-if="showFormModal && isModalOpen('form')"
         class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
-        <div class="after-modal max-w-sm absolute text-start rounded-xl">
-          <div class="py-2 px-5">
+        <div class="after-modal max-w-sm absolute text-start rounded-xl pb-2 px-5">
             <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
             <form @submit.prevent="submitForm">
               <FormField :config="config" />
@@ -180,14 +175,13 @@ export default {
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
               <Button :is-form-valid="isFormValid" button-text="Enviar" />
             </form>
-          </div>
         </div>
       </div>
     </transition>
     <transition name="modal-transition">
       <div v-if="showSecondFormModal && isModalOpen('news')"
         class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
-        <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
+        <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl pb-2">
           <VideoSectionTwo :config="config" @closeModal="closeModal" />
           <form @submit.prevent="submitForm">
             <FormField :config="config" />
@@ -206,7 +200,7 @@ export default {
     <transition name="modal-transition">
       <div v-if="showSecondModal"
         class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
-        <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
+        <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl pb-2">
           <VideoSection :config="config" @closeSecondModal="closeSeconde" />
           <form @submit.prevent="submitForm">
             <FormField :config="config" />
