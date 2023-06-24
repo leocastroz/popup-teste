@@ -159,7 +159,7 @@ export default {
 
 
       <transition name="modal-transition">
-        <div v-if="bases" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-indigo-500/50">
+        <div v-if="bases" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="after-modal max-w-sm absolute text-start rounded-xl">
             <div class="py-2 px-5">
               <PopupHeaderModal
@@ -253,7 +253,7 @@ export default {
 
 
       <transition name="modal-transition">
-        <div v-if="showFormModal && isModalOpen('form')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-indigo-500/50">
+        <div v-if="showFormModal && isModalOpen('form')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="after-modal max-w-sm absolute text-start rounded-xl">
             <div class="py-2 px-5">
               <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
@@ -325,7 +325,7 @@ export default {
         </div>
       </transition>
       <transition name="modal-transition">
-        <div v-if="showSecondFormModal && isModalOpen('news')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-indigo-500/50">
+        <div v-if="showSecondFormModal && isModalOpen('news')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSectionTwo :config="config" @closeModal="closeModal" />
             <div class="text-white">
@@ -399,7 +399,7 @@ export default {
         </div>
       </transition>
       <transition name="modal-transition">
-        <div v-if="showSecondModal" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-indigo-500/50">
+        <div v-if="showSecondModal" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSection :config="config" @closeSecondModal="closeSeconde" />
             <div class="text-black">
