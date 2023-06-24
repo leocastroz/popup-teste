@@ -137,96 +137,45 @@ export default {
       <PopupContainer />
       <PopupHelp />
       <PopupButtons :openModal="openModal" />
-      <div v-if="modalSuccess" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black-500/50">
-        <MyModal
-          :config="config"
-          :spiner-loading="spinerLoading"
-          :modal-cupom="modalCupom"
-          :cupom="cupom"
-          :cut-code="cutCode"
-          :past-code="pastCode"
-          @closeNow="closeNow"
-          @copiar-numero="copiarNumero"
-          @hidden-cut="hiddenCut"
-        />
+      <div v-if="modalSuccess"
+        class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black-500/50">
+        <MyModal :config="config" :spiner-loading="spinerLoading" :modal-cupom="modalCupom" :cupom="cupom"
+          :cut-code="cutCode" :past-code="pastCode" @closeNow="closeNow" @copiar-numero="copiarNumero"
+          @hidden-cut="hiddenCut" />
       </div>
-
-
-
-
-
-
-
-
       <transition name="modal-transition">
-        <div v-if="bases" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
+        <div v-if="bases"
+          class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="after-modal max-w-sm absolute text-start rounded-xl">
             <div class="py-2 px-5">
-              <PopupHeaderModal
-                :config="config"
-                @close-in="closeIn"
-                v-if="true"
-              />
+              <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
               <form @submit.prevent="submitForm">
                 <p class="font-bold text-lg py-3 text-blue-300">
                   {{ config.titleForms }}
                 </p>
-                <div
-                  v-for="(field, index) in config.formFields"
-                  :key="index"
-                  class="bg-black-100 flex justify-between items-center"
-                >
-                  <label
-                    :for="'field' + index"
-                    class="text-sm text-violet-300 pr-3"
-                    >{{ field.label }}</label
-                  >
-                  <input
-                    :type="field.type"
-                    :id="'field' + index"
-                    :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)"
-                    required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
-                  />
+                <div v-for="(field, index) in config.formFields" :key="index"
+                  class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
                 <div class="flex items-center flex justify-between">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
-                  <GenderSelect
-                    :options="config.gender"
-                    :selectedGender.sync="selectedGender"
-                    class="mr-36"
-                  />
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
                 <div class="pt-3">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.shareData }}</label
-                  >
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.acceptTerms }}</label
-                  >
-                  <input
-                    type="checkbox"
-                    id="consentCheckbox"
-                    v-model="consentChecked"
-                  />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button
-                  class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
-                  :class="{
-                    'bg-black': !isFormValid,
-                    'bg-emerald-200': isFormValid,
-                  }"
-                  type="submit"
-                  :disabled="!isFormValid"
-                >
+                <button class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
+                  'bg-black': !isFormValid,
+                  'bg-emerald-200': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
                   {{ config.send }}
                 </button>
               </form>
@@ -234,26 +183,9 @@ export default {
           </div>
         </div>
       </transition>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <transition name="modal-transition">
-        <div v-if="showFormModal && isModalOpen('form')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
+        <div v-if="showFormModal && isModalOpen('form')"
+          class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="after-modal max-w-sm absolute text-start rounded-xl">
             <div class="py-2 px-5">
               <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
@@ -261,62 +193,29 @@ export default {
                 <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
-                <div
-                  v-for="(field, index) in config.formFields"
-                  :key="index"
-                  class="bg-black-100 flex justify-between items-center"
-                >
-                  <label
-                    :for="'field' + index"
-                    class="text-sm text-violet-300 pr-3"
-                    >{{ field.label }}</label
-                  >
-                  <input
-                    :type="field.type"
-                    :id="'field' + index"
-                    :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)"
-                    required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
-                  />
+                <div v-for="(field, index) in config.formFields" :key="index"
+                  class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
                 <div class="flex items-center flex justify-between">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
-                  <GenderSelect
-                    :options="config.gender"
-                    :selectedGender.sync="selectedGender"
-                    class="mr-36"
-                  />
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
                 </div>
                 <div class="pt-3">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.shareData }}</label
-                  >
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.acceptTerms }}</label
-                  >
-                  <input
-                    type="checkbox"
-                    id="consentCheckbox"
-                    v-model="consentChecked"
-                  />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button
-                  class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
-                  :class="{
-                    'bg-black': !isFormValid,
-                    'bg-emerald-200': isFormValid,
-                  }"
-                  type="submit"
-                  :disabled="!isFormValid"
-                >
+                <button class="my-2 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
+                  'bg-black': !isFormValid,
+                  'bg-emerald-200': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
                   {{ config.send }}
                 </button>
               </form>
@@ -325,7 +224,8 @@ export default {
         </div>
       </transition>
       <transition name="modal-transition">
-        <div v-if="showSecondFormModal && isModalOpen('news')" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
+        <div v-if="showSecondFormModal && isModalOpen('news')"
+          class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSectionTwo :config="config" @closeModal="closeModal" />
             <div class="text-white">
@@ -333,64 +233,29 @@ export default {
                 <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
-                <div
-                  v-for="(field, index) in config.formFields"
-                  :key="index"
-                  class="bg-black-100 flex justify-between items-center"
-                >
-                  <label
-                    :for="'field' + index"
-                    class="text-sm text-violet-300 pr-3"
-                    >{{ field.label }}</label
-                  >
-                  <input
-                    :type="field.type"
-                    :id="'field' + index"
-                    :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)"
-                    required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
-                  />
+                <div v-for="(field, index) in config.formFields" :key="index"
+                  class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
-                <div
-                  class="flex items-center flex justify-between text-sm"
-                >
+                <div class="flex items-center flex justify-between text-sm">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
-                  <GenderSelect
-                    :options="config.gender"
-                    :selectedGender.sync="selectedGender"
-                    class="mr-36 pl-3"
-                  />
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
                 </div>
                 <div class="pt-3">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.shareData }}</label
-                  >
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.acceptTerms }}</label
-                  >
-                  <input
-                    type="checkbox"
-                    id="consentCheckbox"
-                    v-model="consentChecked"
-                  />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button
-                  class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
-                  :class="{
-                    'bg-black': !isFormValid,
-                    'bg-emerald-200': isFormValid,
-                  }"
-                  type="submit"
-                  :disabled="!isFormValid"
-                >
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
+                  'bg-black': !isFormValid,
+                  'bg-emerald-200': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
                   {{ config.send }}
                 </button>
               </form>
@@ -399,7 +264,8 @@ export default {
         </div>
       </transition>
       <transition name="modal-transition">
-        <div v-if="showSecondModal" class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
+        <div v-if="showSecondModal"
+          class="modal left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
             <VideoSection :config="config" @closeSecondModal="closeSeconde" />
             <div class="text-black">
@@ -407,64 +273,29 @@ export default {
                 <p class="font-bold text-lg py-3 text-white">
                   {{ config.titleForms }}
                 </p>
-                <div
-                  v-for="(field, index) in config.formFields"
-                  :key="index"
-                  class="bg-black-100 flex justify-between items-center"
-                >
-                  <label
-                    :for="'field' + index"
-                    class="text-sm text-violet-300 pr-3"
-                    >{{ field.label }}</label
-                  >
-                  <input
-                    :type="field.type"
-                    :id="'field' + index"
-                    :value="field.value"
-                    @input="updateFieldValue(index, $event.target.value)"
-                    required
-                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10"
-                  />
+                <div v-for="(field, index) in config.formFields" :key="index"
+                  class="bg-black-100 flex justify-between items-center">
+                  <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
+                  <input :type="field.type" :id="'field' + index" :value="field.value"
+                    @input="updateFieldValue(index, $event.target.value)" required
+                    class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
                 </div>
-                <div
-                  class="flex items-center flex justify-between text-sm"
-                >
+                <div class="flex items-center flex justify-between text-sm">
                   <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
-                  <GenderSelect
-                    :options="config.gender"
-                    :selectedGender.sync="selectedGender"
-                    class="mr-36 pl-3"
-                  />
+                  <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
                 </div>
                 <div class="pt-3">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.shareData }}</label
-                  >
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.shareData }}</label>
                   <input type="checkbox" />
                 </div>
                 <div v-if="config.consentCheckbox" class="my-2">
-                  <label
-                    for="consentCheckbox"
-                    class="text-violet-300 pr-2 text-xs"
-                    >{{ config.acceptTerms }}</label
-                  >
-                  <input
-                    type="checkbox"
-                    id="consentCheckbox"
-                    v-model="consentChecked"
-                  />
+                  <label for="consentCheckbox" class="text-violet-300 pr-2 text-xs">{{ config.acceptTerms }}</label>
+                  <input type="checkbox" id="consentCheckbox" v-model="consentChecked" />
                 </div>
-                <button
-                  class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600"
-                  :class="{
-                    'bg-black': !isFormValid,
-                    'bg-emerald-200': isFormValid,
-                  }"
-                  type="submit"
-                  :disabled="!isFormValid"
-                >
+                <button class="my-6 py-2 px-5 rounded text-xs font-extrabold text-emerald-600" :class="{
+                  'bg-black': !isFormValid,
+                  'bg-emerald-200': isFormValid,
+                }" type="submit" :disabled="!isFormValid">
                   {{ config.send }}
                 </button>
               </form>
