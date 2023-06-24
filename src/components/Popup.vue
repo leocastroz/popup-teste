@@ -2,16 +2,15 @@
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
-import PopupContainer from "./PopupContainer.vue";
 import VideoSection from "./VideoSection.vue";
 import PopupButtons from "./PopupButtons.vue";
 import GenderSelect from "./GenderSelect.vue";
 import PopupHeader from "./PopupHeader.vue";
 import jsonData from "../data/popupConfig";
 import CheckInput from "./CheckInput.vue";
-import PopupHelp from "./PopupHelp.vue";
-import MyModal from "./MyModal.vue";
+import FormField from "./FormField.vue";
 import "../assets/config/popup.css";
+import MyModal from "./MyModal.vue";
 import Button from "./Button.vue";
 
 export default {
@@ -19,15 +18,14 @@ export default {
     PopupHeaderModalTwo,
     PopupHeaderModal,
     VideoSectionTwo,
-    PopupContainer,
     PopupButtons,
     VideoSection,
     GenderSelect,
     PopupHeader,
     CheckInput,
-    PopupHelp,
     MyModal,
-    Button
+    Button,
+    FormField
   },
   data() {
     return {
@@ -137,8 +135,6 @@ export default {
 <template>
   <div v-if="config">
     <PopupHeader />
-    <PopupContainer />
-    <PopupHelp />
     <PopupButtons :openModal="openModal" />
     <div v-if="modalSuccess"
       class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
@@ -153,16 +149,7 @@ export default {
           <div class="py-2 px-5">
             <PopupHeaderModal :config="config" @close-in="closeIn" v-if="true" />
             <form @submit.prevent="submitForm">
-              <p class="font-bold text-lg py-3 text-white">
-                {{ config.titleForms }}
-              </p>
-              <div v-for="(field, index) in config.formFields" :key="index"
-                class="bg-black-100 flex justify-between items-center">
-                <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                <input :type="field.type" :id="'field' + index" :value="field.value"
-                  @input="updateFieldValue(index, $event.target.value)" required
-                  class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
-              </div>
+              <FormField :config="config" />
               <div class="flex items-center flex justify-between">
                 <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                 <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
@@ -183,16 +170,7 @@ export default {
           <div class="py-2 px-5">
             <PopupHeaderModalTwo :config="config" @closeModal="closeModal" />
             <form @submit.prevent="submitForm">
-              <p class="font-bold text-lg py-3 text-white">
-                {{ config.titleForms }}
-              </p>
-              <div v-for="(field, index) in config.formFields" :key="index"
-                class="bg-black-100 flex justify-between items-center">
-                <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-                <input :type="field.type" :id="'field' + index" :value="field.value"
-                  @input="updateFieldValue(index, $event.target.value)" required
-                  class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
-              </div>
+              <FormField :config="config" />
               <div class="flex items-center flex justify-between">
                 <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
                 <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36" />
@@ -212,16 +190,7 @@ export default {
         <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
           <VideoSectionTwo :config="config" @closeModal="closeModal" />
           <form @submit.prevent="submitForm">
-            <p class="font-bold text-lg py-3 text-white">
-              {{ config.titleForms }}
-            </p>
-            <div v-for="(field, index) in config.formFields" :key="index"
-              class="bg-black-100 flex justify-between items-center">
-              <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-              <input :type="field.type" :id="'field' + index" :value="field.value"
-                @input="updateFieldValue(index, $event.target.value)" required
-                class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
-            </div>
+            <FormField :config="config" />
             <div class="flex items-center flex justify-between text-sm">
               <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
               <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
@@ -240,16 +209,7 @@ export default {
         <div class="video-modal text-white px-5 max-w-sm absolute text-start rounded-xl">
           <VideoSection :config="config" @closeSecondModal="closeSeconde" />
           <form @submit.prevent="submitForm">
-            <p class="font-bold text-lg py-3 text-white">
-              {{ config.titleForms }}
-            </p>
-            <div v-for="(field, index) in config.formFields" :key="index"
-              class="bg-black-100 flex justify-between items-center">
-              <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
-              <input :type="field.type" :id="'field' + index" :value="field.value"
-                @input="updateFieldValue(index, $event.target.value)" required
-                class="rounded border-none my-2 bg-violet-300 p-1 mr-10" />
-            </div>
+            <FormField :config="config" />
             <div class="flex items-center flex justify-between text-sm">
               <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
               <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
