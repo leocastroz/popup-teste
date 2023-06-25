@@ -189,8 +189,8 @@ export default {
               <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
               <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
             </div>
-            <CheckInput v-if="config.consentCheckbox" inputId="consentCheckbox" :label="config.shareData" />
-            <CheckInput v-if="config.consentCheckbox" inputId="consentCheckbox" :label="config.acceptTerms"
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
             <Button :is-form-valid="isFormValid" button-text="Enviar" />
           </form>
@@ -208,8 +208,8 @@ export default {
               <p class="text-violet-300 pr-2">{{ config.titleGender }}</p>
               <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-36 pl-3" />
             </div>
-            <CheckInput v-if="config.consentCheckbox" inputId="consentCheckbox" :label="config.shareData" />
-            <CheckInput v-if="config.consentCheckbox" inputId="consentCheckbox" :label="config.acceptTerms"
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
             <Button :is-form-valid="isFormValid" button-text="Enviar" />
           </form>
