@@ -7,7 +7,8 @@
         "subDescription": "Caso deseje ver novamente os Popups, basta clicar nestes botões para abrir e fechar a modal das Popups.",
         "buttonAbout": "SOBRE O JOGO",
         "watchVideo": "VER VÍDEO",
-        "playerVideo": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248517878-4e26a36b-56f7-4b5a-b3a6-7a8dcad66e23.svg"
+        "playerVideo": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248517878-4e26a36b-56f7-4b5a-b3a6-7a8dcad66e23.svg",
+        "handHello": "https://mwcorvettes.com/wp-content/uploads/2019/03/savethewave-300x252.gif"
       },
       "cupomModal": {
         "title": "SEU CUPOM",
@@ -18,7 +19,7 @@
       "firstModal" : {
         "title": "POPUP DO CAÇA-NÍQUEL",
         "subtitle": "Caça-níquel, caça-níqueis ou slot machine é uma máquina de jogo que funciona por meio da introdução de moedas e que paga um prêmio, igualmente em moedas ou com a emissão de um voucher, a quem acertar as combinações previstas.",
-        "imgURL": "https://github.com/leocastroz/user-panel-vue3/assets/72839343/b25407fe-f48a-4455-8d4f-7aab7a5f7b78",
+        "imgURL": "https://media0.giphy.com/media/gTDBX6F0ppjqVNyOPd/giphy.gif?cid=6c09b952zr9mmu9gjsdng0t0kkcqiao6dqvqtoh5fefchukm&ep=v1_gifs_search&rid=giphy.gif&ct=s",
         "closeFistModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
         "shareData": "gostaria de compartilhar seus dados ?",
         "acceptTerms": "aceitar os Termos",
