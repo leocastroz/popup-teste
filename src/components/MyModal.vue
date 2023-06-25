@@ -5,13 +5,13 @@
 		</div>
 		<div v-if="modalCupom">
 			<div class="flex justify-between">
-				<p class="font-black text-base text-white">{{ config.titleCupom }}</p>
-				<img class="close cursor-pointer w-5" :src="config.close" alt="fechar" @click="close" />
+				<p class="font-black text-base text-white">{{ config.cupomModal.title }}</p>
+				<img class="close cursor-pointer w-5" :src="config.cupomModal.closeModal" alt="fechar" @click="close" />
 			</div>
 			<div class="grid start mt-2">
 				<button @click="copiarNumero">
-					<img class="w-7" @click="hiddenCut" v-if="cutCode" :src="config.cut" alt="cortar" />
-					<img class="w-7" v-else-if="pastCode" :src="config.paste" alt="colar" />
+					<img class="w-7" @click="hiddenCut" v-if="cutCode" :src="config.cupomModal.cutCode" alt="cortar" />
+					<img class="w-7" v-else-if="pastCode" :src="config.cupomModal.pasteCode" alt="colar" />
 				</button>
 				<p class="text-start mt-2 text-blue-200 text-sm">{{ cupom }}</p>
 			</div>
