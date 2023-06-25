@@ -1,10 +1,10 @@
 <script>
 import PopupContainer from "./PopupContainer.vue";
-import PopupHelp from "./PopupHelp.vue";
+import HelpHomePage from "./HelpHomePage.vue";
 export default {
   components: {
     PopupContainer,
-    PopupHelp,
+    HelpHomePage,
   },
   props: {
     config: {
@@ -22,6 +22,6 @@ export default {
       <h1 class="text-2xl font-black text-white px-3">{{config.homePage.title}}</h1>
     </div>
     <PopupContainer :config="config" />
-    <PopupHelp :config="config" />
+    <HelpHomePage  :config="config" />
   </div>
 </template>

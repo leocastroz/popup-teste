@@ -1,12 +1,12 @@
 <script>
 import GenderSelect from "@/components/Layout/GenderSelect.vue";
-import PopupButtons from "@/components/Layout/PopupButtons.vue";
+import ButtonsHomePage from "@/components/Layout/ButtonsHomePage.vue";
 import PopupHeader from "@/components/Layout/PopupHeader.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
 import FormField from "@/components/Layout/FormField.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
-import Button from "@/components/Layout/Button.vue";
+import ButtonSend from "@/components/Layout/ButtonSend.vue";
 import VideoSection from "./VideoSection.vue";
 import jsonData from "../data/popupConfig";
 import CheckInput from "./CheckInput.vue";
@@ -18,14 +18,14 @@ export default {
     PopupHeaderModalTwo,
     PopupHeaderModal,
     VideoSectionTwo,
-    PopupButtons,
+    ButtonsHomePage,
     VideoSection,
     GenderSelect,
     PopupHeader,
     CheckInput,
     FormField,
     MyModal,
-    Button
+    ButtonSend
   },
   data() {
     return {
@@ -133,7 +133,7 @@ export default {
 <template>
   <div v-if="config">
     <PopupHeader :config="config" />
-    <PopupButtons :config="config" :openModal="openModal" />
+    <ButtonsHomePage :config="config" :openModal="openModal" />
     <div v-if="modalSuccess"
       class="left-0 top-0 w-screen h-screen absolute text-center flex justify-center items-center z-50 bg-black bg-opacity-50">
       <MyModal :config="config" :spiner-loading="spinerLoading" :modal-cupom="modalCupom" :cupom="cupom"
@@ -154,7 +154,7 @@ export default {
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
-              <Button :is-form-valid="isFormValid" button-text="Enviar" />
+              <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
             </form>
         </div>
       </div>
@@ -173,7 +173,7 @@ export default {
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
-              <Button :is-form-valid="isFormValid" button-text="Enviar" />
+              <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
             </form>
         </div>
       </div>
@@ -192,7 +192,7 @@ export default {
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
-            <Button :is-form-valid="isFormValid" button-text="Enviar" />
+            <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
           </form>
         </div>
       </div>
@@ -211,7 +211,7 @@ export default {
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
-            <Button :is-form-valid="isFormValid" button-text="Enviar" />
+            <ButtonSend  :is-form-valid="isFormValid" button-text="Enviar" />
           </form>
         </div>
       </div>
