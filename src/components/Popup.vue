@@ -1,17 +1,17 @@
 <script>
+import GenderSelect from "@/components/Layout/GenderSelect.vue";
+import PopupButtons from "@/components/Layout/PopupButtons.vue";
+import PopupHeader from "@/components/Layout/PopupHeader.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
+import FormField from "@/components/Layout/FormField.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
+import Button from "@/components/Layout/Button.vue";
 import VideoSection from "./VideoSection.vue";
-import PopupButtons from "./PopupButtons.vue";
-import GenderSelect from "./GenderSelect.vue";
-import PopupHeader from "./PopupHeader.vue";
 import jsonData from "../data/popupConfig";
 import CheckInput from "./CheckInput.vue";
-import FormField from "./FormField.vue";
 import "../assets/config/popup.css";
 import MyModal from "./MyModal.vue";
-import Button from "./Button.vue";
 
 export default {
   components: {

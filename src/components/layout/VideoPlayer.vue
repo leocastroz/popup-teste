@@ -1,6 +1,4 @@
 <script>
-import jsonData  from '../data/popupConfig';
-
 export default {
   name: 'VideoPlayer',
   props: {

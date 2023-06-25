@@ -1,5 +1,5 @@
 <script>
-import '../assets/config/popupbuttons.css';
+import '../../assets/config/popupbuttons.css' ;
 
 export default {
   props: {
