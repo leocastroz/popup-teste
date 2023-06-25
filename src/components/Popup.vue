@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     isFormValid() {
-      const requiredFields = this.config.formFields.filter(
+      const requiredFields = this.config.formsLayout.formFields.filter(
         (field) => field.required
       )
       const filledFields = this.formValues.filter((value) => value !== "")
@@ -148,8 +148,8 @@ export default {
             <form @submit.prevent="submitForm">
               <FormField :config="config" />
               <div class="flex items-center flex justify-between">
-                <p class="text-violet-300">{{ config.titleGender }}</p>
-                <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-10" />
+                <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
+                <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="mr-10" />
               </div>
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
@@ -167,8 +167,8 @@ export default {
             <form @submit.prevent="submitForm">
               <FormField :config="config" />
               <div class="flex items-center flex justify-between">
-                <p class="text-violet-300">{{ config.titleGender }}</p>
-                <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-10"/>
+                <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
+                <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="mr-10"/>
               </div>
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
@@ -186,8 +186,8 @@ export default {
           <form @submit.prevent="submitForm">
             <FormField :config="config" />
             <div class="flex items-center flex justify-between text-sm">
-              <p class="text-violet-300">{{ config.titleGender }}</p>
-              <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-10" />
+              <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
+              <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="mr-10" />
             </div>
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
@@ -205,8 +205,8 @@ export default {
           <form @submit.prevent="submitForm">
             <FormField :config="config" />
             <div class="flex items-center flex justify-between text-sm">
-              <p class="text-violet-300">{{ config.titleGender }}</p>
-              <GenderSelect :options="config.gender" :selectedGender.sync="selectedGender" class="mr-10" />
+              <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
+              <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="mr-10" />
             </div>
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"

@@ -11,8 +11,8 @@ export default {
 
 <template>
   <div>
-    <p class="font-bold text-lg py-3 text-white">{{ config.titleForms }}</p>
-    <div v-for="(field, index) in config.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
+    <p class="font-bold text-lg py-3 text-white">{{ config.formsLayout.titleForms }}</p>
+    <div v-for="(field, index) in config.formsLayout.formFields" :key="index" class="bg-black-100 flex justify-between items-center">
       <label :for="'field' + index" class="text-sm text-violet-300 pr-3">{{ field.label }}</label>
       <input :type="field.type" :id="'field' + index" :value="field.value"
         @input="updateFieldValue(index, $event.target.value)" required

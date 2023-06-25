@@ -34,17 +34,19 @@
         "acceptTerms": "aceitar os Termos",
         "consentCheckbox": true
       },
-      "titleForms": "# CADASTRE-SE AGORA",
-      "formFields": [
-        { "label": "Seu e-mail", "type": "email" },
-        { "label": "Seu nome", "type": "text" },
-        { "label": "Número +DDD", "type": "tel" }
-      ],
-      "titleGender": "Gênero",
-      "gender": [
-        { "label": "Masculino", "type": "email" },
-        { "label": "Feminino", "type": "text" },
-        { "label": "Outros", "type": "tel" }
-      ]
+      "formsLayout": {
+        "titleForms": "# CADASTRE-SE AGORA",
+        "formFields": [
+          { "label": "Seu e-mail", "type": "email" },
+          { "label": "Seu nome", "type": "text" },
+          { "label": "Número +DDD", "type": "tel" }
+        ],
+        "titleGender": "Gênero",
+        "gender": [
+          { "label": "Masculino", "type": "email" },
+          { "label": "Feminino", "type": "text" },
+          { "label": "Outros", "type": "tel" }
+        ]
+      }
     }
   }
