@@ -1,3 +1,20 @@
+<script>
+import '../assets/config/popupbuttons.css';
+
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true,
+    },
+    openModal: {
+      type: Function,
+      required: true,
+    },
+  },
+};
+</script>
+
 <template>
   <div class="text-center p-10 flex justify-center">
     <button
@@ -15,20 +32,3 @@
     </button>
   </div>
 </template>
-
-<script>
-import '../assets/config/popupbuttons.css';
-
-export default {
-  props: {
-    config: {
-      type: Object,
-      required: true,
-    },
-    openModal: {
-      type: Function,
-      required: true,
-    },
-  },
-};
-</script>

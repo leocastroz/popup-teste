@@ -1,3 +1,19 @@
+<script>
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    closeSeconde() {
+      this.$emit("closeSecondModal");
+    },
+  },
+};
+</script>
+
 <template>
   <div>
     <div class="register flex justify-between mt-5">
@@ -19,20 +35,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    config: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    closeSeconde() {
-      this.$emit("closeSecondModal");
-    },
-  },
-};
-</script>
-

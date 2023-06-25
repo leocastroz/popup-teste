@@ -64,7 +64,7 @@ export default {
       const allRequiredFieldsFilled =
         requiredFields.length === filledFields.length
       const consentChecked =
-        !this.config.consentCheckbox || this.consentChecked
+        !this.config.firstModal.consentCheckbox && !this.secondModal.consentCheckbox ||  this.consentChecked
       return allRequiredFieldsFilled && consentChecked
     },
   },

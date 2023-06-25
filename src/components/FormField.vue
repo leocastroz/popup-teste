@@ -1,3 +1,14 @@
+<script>
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true,
+    },
+  },
+};
+</script>
+
 <template>
   <div>
     <p class="font-bold text-lg py-3 text-white">{{ config.titleForms }}</p>
@@ -9,14 +20,3 @@
     </div>
   </div>
 </template>
-  
-<script>
-export default {
-  props: {
-    config: {
-      type: Object,
-      required: true,
-    },
-  },
-};
-</script>

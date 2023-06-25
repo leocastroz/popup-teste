@@ -1,3 +1,19 @@
+<script>
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    closeIn() {
+      this.$emit("close-in");
+    },
+  },
+};
+</script>
+
 <template>
   <div>
     <div class="flex justify-between">
@@ -17,19 +33,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    config: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    closeIn() {
-      this.$emit("close-in");
-    },
-  },
-};
-</script>
