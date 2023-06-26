@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "autoprefixer": "^10.4.14",
@@ -15,7 +17,15 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "@vitejs/plugin-vue": "^4.2.3",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.1.0",
+    "eslint-plugin:@typescript-eslint": "^5.5.0",
+    "eslint-plugin-vue": "^7.18.0",
+    "prettier": "^2.4.1",
     "vite": "^4.3.9"
   }
 }

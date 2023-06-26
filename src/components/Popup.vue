@@ -1,17 +1,17 @@
 <script>
-import GenderSelect from "@/components/layout/GenderSelect.vue";
 import ButtonsHomePage from "@/components/layout/ButtonsHomePage.vue";
+import GenderSelect from "@/components/layout/GenderSelect.vue";
 import PopupHeader from "@/components/layout/PopupHeader.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
+import ButtonSend from "@/components/layout/ButtonSend.vue";
 import FormField from "@/components/layout/FormField.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
-import ButtonSend from "@/components/layout/ButtonSend.vue";
 import VideoSection from "./VideoSection.vue";
 import jsonData from "../data/popupConfig";
 import CheckInput from "./CheckInput.vue";
-import "../assets/config/popup.css";
 import MyModal from "./MyModal.vue";
+import "../assets/config/popup.css";
 
 export default {
   components: {
@@ -23,9 +23,9 @@ export default {
     GenderSelect,
     PopupHeader,
     CheckInput,
+    ButtonSend,
     FormField,
     MyModal,
-    ButtonSend
   },
   data() {
     return {
@@ -34,6 +34,7 @@ export default {
       showSecondModal: false,
       spinerLoading: false,
       consentChecked: true,
+      checkedShare: false,
       modalSuccess: false,
       showFormModal: true,
       selectedGender: "",
@@ -151,7 +152,7 @@ export default {
                 <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
                 <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="cursor-pointer" />
               </div>
-              <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
+              <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" :checked="checkedShare"/>
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
               <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
@@ -170,7 +171,7 @@ export default {
                 <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
                 <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="cursor-pointer"/>
               </div>
-              <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" />
+              <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.shareData" :checked="checkedShare" />
               <CheckInput v-if="config.firstModal.consentCheckbox" inputId="consentCheckbox" :label="config.firstModal.acceptTerms"
                 :checked="consentChecked" @update:checked="consentChecked = $event" />
               <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
@@ -189,7 +190,7 @@ export default {
               <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
               <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="cursor-pointer" />
             </div>
-            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" :checked="checkedShare" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
             <ButtonSend :is-form-valid="isFormValid" button-text="Enviar" />
@@ -208,7 +209,7 @@ export default {
               <p class="text-violet-300">{{ config.formsLayout.titleGender }}</p>
               <GenderSelect :options="config.formsLayout.gender" :selectedGender.sync="selectedGender" class="cursor-pointer" />
             </div>
-            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" />
+            <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.shareData" :checked="checkedShare" />
             <CheckInput v-if="config.secondModal.consentCheckbox" inputId="consentCheckbox" :label="config.secondModal.acceptTerms"
               :checked="consentChecked" @update:checked="consentChecked = $event" />
             <ButtonSend  :is-form-valid="isFormValid" button-text="Enviar" />
