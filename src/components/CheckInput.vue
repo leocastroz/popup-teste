@@ -26,7 +26,7 @@ export default {
 	<div>
 		<div class="pt-3">
 			<label :for="inputId" class="text-violet-300 pr-2 text-xs">{{ label }}</label>
-			<input :id="inputId" type="checkbox" :checked="checked" @change="handleChange" />
+			<input :id="inputId" type="checkbox" :checked="checked" @change="handleChange" class="cursor-pointer" />
 		</div>
 	</div>
 </template>

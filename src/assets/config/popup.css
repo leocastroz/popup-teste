@@ -4,7 +4,7 @@
 
 .modal-transition-enter-active,
 .modal-transition-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.5s;
 }
 
 .modal-transition-enter,
@@ -15,10 +15,6 @@
 .after-modal, .video-modal  {
   background-image: url(../../assets/images/second-background.svg);
   border: 3px solid #01b6fe;
-}
-
-.after-modal form input, .video-modal form input {
-  color: rgb(0, 0, 0);
 }
 
 .close {

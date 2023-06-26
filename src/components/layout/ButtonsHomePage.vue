@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="text-center p-10 flex justify-center">
     <button
-      class="popup-button py-2 px-5 bg-black tracking-wide font-black hover:bg-blue-500 border-solid border-2 border-sky-500  hover:text-white cursor-pointer text-xs text-white rounded border-2 border-solid m-5"
+      class="popup-button py-2 px-5 bg-black tracking-wide font-black hover:bg-blue-500 text-xs border-solid border-4 border-sky-500 cursor-pointer text-white rounded border-solid m-5"
       @click="openModal('form')"
     >
       {{config.homePage.buttonAbout}}

@@ -17,7 +17,7 @@ export default {
 <template>
   <div>
     <div class="flex justify-between">
-      <h2 class="font-black text-base my-5 text-white">{{ config.firstModal.title }}</h2>
+      <h2 class="font-black my-5 text-white sm:text-base text-sm" >{{ config.firstModal.title }}</h2>
       <img :src="config.firstModal.closeFistModal" alt="close" class="close cursor-pointer w-5"
         @click="closeModal('form')" />
     </div>
