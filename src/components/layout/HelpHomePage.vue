@@ -3,14 +3,16 @@ export default {
   props: {
     config: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
 <template>
   <div class="text-center w-80 mx-auto flex">
-    <p class="text-white font-medium text-sm">{{config.homePage.subDescription}}</p>
+    <p class="text-white font-medium text-sm">
+      {{ config.homePage.subDescription }}
+    </p>
   </div>
 </template>

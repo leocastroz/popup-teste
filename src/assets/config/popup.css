@@ -12,7 +12,8 @@
   opacity: 0;
 }
 
-.after-modal, .video-modal  {
+.after-modal,
+.video-modal {
   background-image: url(../../assets/images/second-background.svg);
   border: 3px solid #01b6fe;
 }

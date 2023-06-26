@@ -5,13 +5,12 @@
 </template>
 
 <script setup>
-import Popup from './components/Popup.vue';
+import Popup from './components/Popup.vue'
 import popupConfig from './data/popupConfig.json'
-
 
 const setup = () => {
   return {
-    popupConfig
-  };
-};
+    popupConfig,
+  }
+}
 </script>

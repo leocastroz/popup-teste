@@ -8,10 +8,10 @@ export default {
   },
   methods: {
     closeIn() {
-      this.$emit("close-in");
+      this.$emit('close-in')
     },
   },
-};
+}
 </script>
 
 <template>
@@ -27,7 +27,9 @@ export default {
         @click="closeIn"
       />
     </div>
-    <p class="text-xs/[15px] text-justify pb-4 text-blue-300">{{ config.firstModal.subtitle }}</p>
+    <p class="text-xs/[15px] text-justify pb-4 text-blue-300">
+      {{ config.firstModal.subtitle }}
+    </p>
     <div class="w-full flex justify-center">
       <img :src="config.firstModal.imgURL" alt="slot" class="w-40" />
     </div>

@@ -4,8 +4,8 @@ export default {
   props: {
     videoBaseURL: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
 }
 </script>
@@ -13,7 +13,7 @@ export default {
 <template>
   <div>
     <video controls>
-      <source :src="videoBaseURL" type="video/mp4">
+      <source :src="videoBaseURL" type="video/mp4" />
     </video>
   </div>
 </template>

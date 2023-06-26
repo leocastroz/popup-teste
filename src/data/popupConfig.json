@@ -1,52 +1,70 @@
-  {
-    "slot-machine": {
-      "homePage": {
-        "title": "POPUP - CONVERT",
-        "subtitle": "BEM-VINDO À POPUP",
-        "description": "Esse é um componente de popup genérico, que pode ser usado para exibir qualquer onteúdo.",
-        "subDescription": "Caso deseje ver novamente os Popups, basta clicar nestes botões para abrir e fechar a modal das Popups.",
-        "buttonAbout": "SOBRE O JOGO",
-        "watchVideo": "VER VÍDEO",
-        "playerVideo": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248517878-4e26a36b-56f7-4b5a-b3a6-7a8dcad66e23.svg",
-        "handHello": "https://mwcorvettes.com/wp-content/uploads/2019/03/savethewave-300x252.gif"
-      },
-      "cupomModal": {
-        "title": "SEU CUPOM",
-        "closeModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
-        "cutCode": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248490316-4470fe30-b707-4d26-a979-86ab732d81a2.svg",
-        "pasteCode": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248490388-3b483534-b2c2-46bc-89ef-9ca50d145046.svg"
-      },
-      "firstModal" : {
-        "title": "POPUP DO CAÇA-NÍQUEL",
-        "subtitle": "Caça-níquel, caça-níqueis ou slot machine é uma máquina de jogo que funciona por meio da introdução de moedas e que paga um prêmio, igualmente em moedas ou com a emissão de um voucher, a quem acertar as combinações previstas.",
-        "imgURL": "https://github.com/leocastroz/popup-teste/assets/72839343/fff98e83-e0b7-4f20-aaec-0d736ad6c038",
-        "closeFistModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
-        "shareData": "gostaria de compartilhar seus dados ?",
-        "acceptTerms": "aceitar os Termos",
-        "consentCheckbox": true
-      },
-      "secondModal": {
-        "title": "VÍDEO CAÇA-NÍQUEL",
-        "subtitle": "Jogue agora e ganhe um cupom de 10% de desconto para usar em qualquer produto da loja!",
-        "videoURL": "https://github.com/leocastroz/magic-QRcode-vue3/assets/72839343/e740ab25-abf2-496f-8d1c-4de9d60665f7",
-        "closeSecondModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
-        "shareData": "gostaria de compartilhar seus dados ?",
-        "acceptTerms": "aceitar os Termos",
-        "consentCheckbox": true
-      },
-      "formsLayout": {
-        "titleForms": "# CADASTRE-SE AGORA",
-        "formFields": [
-          { "label": "Seu e-mail", "type": "email" },
-          { "label": "Seu nome", "type": "text" },
-          { "label": "Número +DDD", "type": "tel" }
-        ],
-        "titleGender": "Gênero",
-        "gender": [
-          { "label": "Masculino", "type": "email" },
-          { "label": "Feminino", "type": "text" },
-          { "label": "Outros", "type": "tel" }
-        ]
-      }
+{
+  "slot-machine": {
+    "homePage": {
+      "title": "POPUP - CONVERT",
+      "subtitle": "BEM-VINDO À POPUP",
+      "description": "Esse é um componente de popup genérico, que pode ser usado para exibir qualquer onteúdo.",
+      "subDescription": "Caso deseje ver novamente os Popups, basta clicar nestes botões para abrir e fechar a modal das Popups.",
+      "buttonAbout": "SOBRE O JOGO",
+      "watchVideo": "VER VÍDEO",
+      "playerVideo": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248517878-4e26a36b-56f7-4b5a-b3a6-7a8dcad66e23.svg",
+      "handHello": "https://mwcorvettes.com/wp-content/uploads/2019/03/savethewave-300x252.gif"
+    },
+    "cupomModal": {
+      "title": "SEU CUPOM",
+      "closeModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
+      "cutCode": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248490316-4470fe30-b707-4d26-a979-86ab732d81a2.svg",
+      "pasteCode": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248490388-3b483534-b2c2-46bc-89ef-9ca50d145046.svg"
+    },
+    "firstModal": {
+      "title": "POPUP DO CAÇA-NÍQUEL",
+      "subtitle": "Caça-níquel, caça-níqueis ou slot machine é uma máquina de jogo que funciona por meio da introdução de moedas e que paga um prêmio, igualmente em moedas ou com a emissão de um voucher, a quem acertar as combinações previstas.",
+      "imgURL": "https://github.com/leocastroz/popup-teste/assets/72839343/fff98e83-e0b7-4f20-aaec-0d736ad6c038",
+      "closeFistModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
+      "shareData": "gostaria de compartilhar seus dados ?",
+      "acceptTerms": "aceitar os Termos",
+      "consentCheckbox": true
+    },
+    "secondModal": {
+      "title": "VÍDEO CAÇA-NÍQUEL",
+      "subtitle": "Jogue agora e ganhe um cupom de 10% de desconto para usar em qualquer produto da loja!",
+      "videoURL": "https://github.com/leocastroz/magic-QRcode-vue3/assets/72839343/e740ab25-abf2-496f-8d1c-4de9d60665f7",
+      "closeSecondModal": "https://github-production-user-asset-6210df.s3.amazonaws.com/72839343/248293465-455c2370-7de5-43d6-a3dd-f655aecf45f3.svg",
+      "shareData": "gostaria de compartilhar seus dados ?",
+      "acceptTerms": "aceitar os Termos",
+      "consentCheckbox": true
+    },
+    "formsLayout": {
+      "titleForms": "# CADASTRE-SE AGORA",
+      "formFields": [
+        {
+          "label": "Seu e-mail",
+          "type": "email"
+        },
+        {
+          "label": "Seu nome",
+          "type": "text"
+        },
+        {
+          "label": "Número +DDD",
+          "type": "tel"
+        }
+      ],
+      "titleGender": "Gênero",
+      "gender": [
+        {
+          "label": "Masculino",
+          "type": "email"
+        },
+        {
+          "label": "Feminino",
+          "type": "text"
+        },
+        {
+          "label": "Outros",
+          "type": "tel"
+        }
+      ]
     }
   }
+}

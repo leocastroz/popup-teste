@@ -8,10 +8,10 @@ export default {
   },
   methods: {
     closeSeconde() {
-      this.$emit("closeSecondModal");
+      this.$emit('closeSecondModal')
     },
   },
-};
+}
 </script>
 
 <template>
