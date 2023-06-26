@@ -1,12 +1,12 @@
 <script>
-import GenderSelect from "@/components/Layout/GenderSelect.vue";
-import ButtonsHomePage from "@/components/Layout/ButtonsHomePage.vue";
-import PopupHeader from "@/components/Layout/PopupHeader.vue";
+import GenderSelect from "@/components/layout/GenderSelect.vue";
+import ButtonsHomePage from "@/components/layout/ButtonsHomePage.vue";
+import PopupHeader from "@/components/layout/PopupHeader.vue";
 import PopupHeaderModalTwo from "./PopupHeaderModalTwo.vue";
-import FormField from "@/components/Layout/FormField.vue";
+import FormField from "@/components/layout/FormField.vue";
 import PopupHeaderModal from "./PopupHeaderModal.vue";
 import VideoSectionTwo from "./VideoSectionTwo.vue";
-import ButtonSend from "@/components/Layout/ButtonSend.vue";
+import ButtonSend from "@/components/layout/ButtonSend.vue";
 import VideoSection from "./VideoSection.vue";
 import jsonData from "../data/popupConfig";
 import CheckInput from "./CheckInput.vue";
