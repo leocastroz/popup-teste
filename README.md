@@ -16,6 +16,10 @@
   </p>
 </p>
 
+## Node Version
+
+`v16.14.1`
+
 ## Installation
 
 `yarn install` or `npm install`
